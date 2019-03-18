@@ -6,6 +6,7 @@ public class RootViewController : UIViewController, CardCellDelegate {
     // MARK: - Attributes
     var cardInformationSet = [CardInformation]()
     var cardsFinished: CGFloat = 0
+    var previousCardInfo: (CardInformation, IndexPath)?
     
     // MARK: - View properties
     var cardCollectionView: UICollectionView!
@@ -24,6 +25,10 @@ public class RootViewController : UIViewController, CardCellDelegate {
         super.viewDidLoad()
         self.setupElements()
         self.addDummyData()
+        
+        self.cardInformationSet.forEach { (cardInfo) in
+            print(cardInfo.title)
+        }
     }
     
     // MARK: - Methods
@@ -59,12 +64,12 @@ public class RootViewController : UIViewController, CardCellDelegate {
     
     private func addDummyData() {
         cardInformationSet.append(CardInformation(title: "Batik", description: "Batik is a technique of wax-resist dyeing applied to whole cloth, or cloth made using this technique, originated from Indonesia, Batik is made either by drawing dots and lines of the resist with a spouted tool called a canting, or by printing the resist with a copper stamp called a cap. The applied wax resists dyes and therefore allows the artisan to colour selectively by soaking the cloth in one colour, removing the wax with boiling water, and repeating if multiple colours are desired.\n(copyright of Wikipedia)"))
-        cardInformationSet.append(CardInformation(title: "Kecak", description: "Kecak dance, known in Indonesian as Tari Kecak, is a form of Balinese hindu dance and music drama that was developed in the 1930s in Bali, Indonesia. Since its creation it has been performed primarily by men, with the very first women's kecak group starting in 2006. The dance mainly plays about the Ramayana and is traditionally performed in temples and villages across Bali.\n(copyright of Wikipedia)"))
-        cardInformationSet.append(CardInformation(title: "Rendang", description: "Rendang is a spicy meat dish which originated in Indonesia, especially the ethnic group of Minangkabau people, and is now commonly served across the country. One of the characteristic foods of Minangkabau culture, it is served at ceremonial occasions and to honour guests. Rendang is also served among the Malay community. Rendang is traditionally prepared by the Minangkabau community during festive occasions such as traditional ceremonies, wedding feasts and Hari Raya (Eid al-Fitr).\n(copyright of Wikipedia)"))
-        cardInformationSet.append(CardInformation(title: "Candi Borobudur", description: "This famous Buddhist temple, dating from the 8th and 9th centuries, is located in central Java. It was built in three tiers: a pyramidal base with five concentric square terraces, the trunk of a cone with three circular platforms and, at the top, a monumental stupa. The walls and balustrades are decorated with fine low reliefs, covering a total surface area of 2,500 m2. Around the circular platforms are 72 openwork stupas, each containing a statue of the Buddha. The monument was restored with UNESCO's help in the 1970s\n(copyright of Wikipedia)"))
-        cardInformationSet.append(CardInformation(title: "Pencak Silat", description: "Pencak silat is an umbrella term for a class of related Indonesian martial arts. In neighbouring countries the term usually refers to professional competitive silat. It is a full-body fighting form incorporating strikes, grappling and throwing in addition to weaponry. Every part of the body is used and subject to attack. Pencak silat was practiced not only for physical defense but also for psychological ends\n(copyright of Wikipedia)"))
-        cardInformationSet.append(CardInformation(title: "Angklung", description: "The angklung is a musical instrument from Indonesia made of a varying number of bamboo tubes attached to a bamboo frame. The tubes are carved to have a resonant pitch when struck and are tuned to octaves, similar to Western handbells. The base of the frame is held in one hand, whilst the other hand shakes the instrument, causing a repeating note to sound. Each of three or more performers in an angklung ensemble play just one note or more, but altogether complete melodies are produced.\n(copyright of Wikipedia)"))
-        cardInformationSet.append(CardInformation(title: "Wayang", description: "Wayang, also known as Wajang, is a form of puppet theatre art found in Indonesia and other parts of Southeast Asia, wherein a dramatic story is told through shadows thrown by puppets and sometimes combined with human characters. The art form celebrates the Indonesian culture and artistic talent; its origins are traced to the spread of Hinduism in the medieval era and the arrival of leather-based puppet arts called Tholu bommalata from southern India.\n(copyright of Wikipedia)"))
+//        cardInformationSet.append(CardInformation(title: "Kecak", description: "Kecak dance, known in Indonesian as Tari Kecak, is a form of Balinese hindu dance and music drama that was developed in the 1930s in Bali, Indonesia. Since its creation it has been performed primarily by men, with the very first women's kecak group starting in 2006. The dance mainly plays about the Ramayana and is traditionally performed in temples and villages across Bali.\n(copyright of Wikipedia)"))
+//        cardInformationSet.append(CardInformation(title: "Rendang", description: "Rendang is a spicy meat dish which originated in Indonesia, especially the ethnic group of Minangkabau people, and is now commonly served across the country. One of the characteristic foods of Minangkabau culture, it is served at ceremonial occasions and to honour guests. Rendang is also served among the Malay community. Rendang is traditionally prepared by the Minangkabau community during festive occasions such as traditional ceremonies, wedding feasts and Hari Raya (Eid al-Fitr).\n(copyright of Wikipedia)"))
+//        cardInformationSet.append(CardInformation(title: "Candi Borobudur", description: "This famous Buddhist temple, dating from the 8th and 9th centuries, is located in central Java. It was built in three tiers: a pyramidal base with five concentric square terraces, the trunk of a cone with three circular platforms and, at the top, a monumental stupa. The walls and balustrades are decorated with fine low reliefs, covering a total surface area of 2,500 m2. Around the circular platforms are 72 openwork stupas, each containing a statue of the Buddha. The monument was restored with UNESCO's help in the 1970s\n(copyright of Wikipedia)"))
+//        cardInformationSet.append(CardInformation(title: "Pencak Silat", description: "Pencak silat is an umbrella term for a class of related Indonesian martial arts. In neighbouring countries the term usually refers to professional competitive silat. It is a full-body fighting form incorporating strikes, grappling and throwing in addition to weaponry. Every part of the body is used and subject to attack. Pencak silat was practiced not only for physical defense but also for psychological ends\n(copyright of Wikipedia)"))
+//        cardInformationSet.append(CardInformation(title: "Angklung", description: "The angklung is a musical instrument from Indonesia made of a varying number of bamboo tubes attached to a bamboo frame. The tubes are carved to have a resonant pitch when struck and are tuned to octaves, similar to Western handbells. The base of the frame is held in one hand, whilst the other hand shakes the instrument, causing a repeating note to sound. Each of three or more performers in an angklung ensemble play just one note or more, but altogether complete melodies are produced.\n(copyright of Wikipedia)"))
+//        cardInformationSet.append(CardInformation(title: "Wayang", description: "Wayang, also known as Wajang, is a form of puppet theatre art found in Indonesia and other parts of Southeast Asia, wherein a dramatic story is told through shadows thrown by puppets and sometimes combined with human characters. The art form celebrates the Indonesian culture and artistic talent; its origins are traced to the spread of Hinduism in the medieval era and the arrival of leather-based puppet arts called Tholu bommalata from southern India.\n(copyright of Wikipedia)"))
         
         cardInformationSet.forEach { (cardInfo) in
             self.cardInformationSet.append(cardInfo)
@@ -97,22 +102,50 @@ extension RootViewController: UICollectionViewDataSource {
             UIView.transition(with: cardCell.singleCardView, duration: 0.5, options: .transitionFlipFromLeft, animations: {
                 cardCell.singleCardView.backgroundColor = .red
             }) { (_) in
-                // Completion handler
+                let currentCardInfo = self.cardInformationSet[indexPath.item]
+                
+                if let previousCardInfo = self.previousCardInfo?.0,
+                    let previousIndexPath = self.previousCardInfo?.1 {
+                    if currentCardInfo.title == previousCardInfo.title {
+                        print("match!")
+                        self.resizeAndStackCardView(sender: cardCell)
+                        self.resizeAndStackCardView(sender: self.cardCollectionView.cellForItem(at: previousIndexPath) as! CardCell)
+                    } else {
+                        self.flipBackCardView(sender: cardCell)
+                        self.flipBackCardView(sender: self.cardCollectionView.cellForItem(at: previousIndexPath) as! CardCell)
+                    }
+                } else {
+                    print("\(self.cardInformationSet[0].isOpened == self.cardInformationSet[1].isOpened)")
+                    self.previousCardInfo = (currentCardInfo, indexPath)
+                }
             }
         } else {
-            UIView.transition(with: cardCell.singleCardView, duration: 0.5, options: .transitionFlipFromRight, animations: {
-                cardCell.singleCardView.backgroundColor = UIColor(patternImage: UIImage(named: "card-back.jpg")!)
-                cardCell.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
-                cardCell.center = CGPoint(x: self.cardCollectionView.frame.maxX - cardCell.frame.width/2 - 20.0 - 10*self.cardsFinished, y: self.cardCollectionView.frame.minY + cardCell.frame.height/2 + 30.0)
-                self.view.sendSubviewToBack(cardCell)
-            }) { (_) in
-                cardCell.isUserInteractionEnabled = false
-                self.cardsFinished+=1
-                self.view.sendSubviewToBack(cardCell.singleCardView)
-            }
+            self.flipBackCardView(sender: cardCell)
         }
         
         cardInformationSet[indexPath.item].isOpened = !(cardInformationSet[indexPath.item].isOpened)
+    }
+    
+    private func resizeAndStackCardView(sender: CardCell) {
+        UIView.transition(with: sender, duration: 0.5, options: .transitionFlipFromRight, animations: {
+            sender.singleCardView.backgroundColor = UIColor(patternImage: UIImage(named: "card-back.jpg")!)
+            sender.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+            sender.center = CGPoint(x: self.cardCollectionView.frame.maxX - sender.frame.width/2 - 20.0 - 10*self.cardsFinished, y: self.cardCollectionView.frame.minY + sender.frame.height/2 + 30.0)
+            self.view.sendSubviewToBack(sender)
+        }) { (_) in
+            sender.isUserInteractionEnabled = false
+            self.cardsFinished+=1
+//            self.view.sendSubviewToBack(sender.singleCardView)
+            self.previousCardInfo = nil
+        }
+    }
+    
+    private func flipBackCardView(sender: CardCell) {
+        UIView.transition(with: sender, duration: 0.5, options: .transitionFlipFromRight, animations: {
+            sender.singleCardView.backgroundColor = UIColor(patternImage: UIImage(named: "card-back.jpg")!)
+        }) { (_) in
+            self.previousCardInfo = nil
+        }
     }
 }
 
