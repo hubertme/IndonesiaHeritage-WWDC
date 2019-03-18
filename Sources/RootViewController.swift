@@ -20,13 +20,24 @@ public class RootViewController : UIViewController {
     }
     
     private func setupElements() {
+        // Header label
+        let headerLabel = UILabel(frame: CGRect(x: 0, y: 16, width: self.view.frame.width, height: 40))
+        headerLabel.text = "Indonesia Heritage Card"
+        headerLabel.textColor = .black
+        headerLabel.textAlignment = .center
+        headerLabel.numberOfLines = 0
+        headerLabel.font = UIFont.systemFont(ofSize: 30)
+        
+        self.view.addSubview(headerLabel)
+        
         // Collection view
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         flowLayout.itemSize = CGSize(width: 80, height: 200)
+        flowLayout.scrollDirection = .vertical
         
-        cardCollectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: flowLayout)
-        cardCollectionView.backgroundColor = .clear
+        cardCollectionView = UICollectionView(frame: CGRect(x: 0, y: headerLabel.frame.maxY + 10, width: self.view.frame.width, height: self.view.frame.height - headerLabel.frame.height - 10), collectionViewLayout: flowLayout)
+        cardCollectionView.backgroundColor = .lightGray
         print(cardCollectionView.frame)
         cardCollectionView.delegate = self
         cardCollectionView.dataSource = self
