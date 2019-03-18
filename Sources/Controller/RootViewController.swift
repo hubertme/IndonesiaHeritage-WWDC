@@ -5,6 +5,7 @@ public class RootViewController : UIViewController, CardCellDelegate {
     
     // MARK: - Attributes
     var cardInformationSet = [CardInformation]()
+    var cardsFinished: CGFloat = 0
     
     // MARK: - View properties
     var cardCollectionView: UICollectionView!
@@ -86,9 +87,6 @@ extension RootViewController: UICollectionViewDataSource {
         if !cardInformationSet[indexPath.item].isOpened {
             UIView.transition(with: cardCell.singleCardView, duration: 0.5, options: .transitionFlipFromLeft, animations: {
                 cardCell.singleCardView.backgroundColor = .red
-//                cardCell.transform = CGAffineTransform(scaleX: 2, y: 2)
-//                cardCell.center = self.view.center
-                self.view.bringSubviewToFront(cardCell)
             }) { (_) in
                 // Completion handler
             }
@@ -96,9 +94,12 @@ extension RootViewController: UICollectionViewDataSource {
             UIView.transition(with: cardCell.singleCardView, duration: 0.5, options: .transitionFlipFromRight, animations: {
                 cardCell.singleCardView.backgroundColor = UIColor(patternImage: UIImage(named: "card-back.jpg")!)
                 cardCell.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
-                cardCell.center = CGPoint(x: self.cardCollectionView.frame.maxX - cardCell.frame.width/2 - 20, y: self.cardCollectionView.frame.minY + cardCell.frame.height/2 + 30)
+                cardCell.center = CGPoint(x: self.cardCollectionView.frame.maxX - cardCell.frame.width/2 - 20.0 - 10*self.cardsFinished, y: self.cardCollectionView.frame.minY + cardCell.frame.height/2 + 30.0)
+                self.view.sendSubviewToBack(cardCell)
             }) { (_) in
                 cardCell.isUserInteractionEnabled = false
+                self.cardsFinished+=1
+                self.view.sendSubviewToBack(cardCell.singleCardView)
             }
         }
         
