@@ -18,6 +18,20 @@ public class CardCell: UICollectionViewCell {
     
     // MARK: - Methods
     private func setupElements() {
-        print("Ready to setup elements!")
+//        let cardButton = UIButton(type: .custom)
+//        cardButton.frame = self.contentView.frame
+//        cardButton.backgroundColor = .blue
+//        cardButton
+        
+        let singleCardView = UIView(frame: self.contentView.frame)
+        singleCardView.backgroundColor = .black
+        let tapToFlipGesture = UITapGestureRecognizer(target: self, action: #selector(handleCardViewTapped))
+        singleCardView.addGestureRecognizer(tapToFlipGesture)
+        
+        self.contentView.addSubview(singleCardView)
+    }
+    
+    @objc private func handleCardViewTapped() {
+        print("Card tapped!")
     }
 }
