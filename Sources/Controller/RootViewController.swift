@@ -13,7 +13,7 @@ public class RootViewController : UIViewController, CardCellDelegate {
     override public func loadView() {
         super.loadView()
         let view = UIView()
-        view.frame.size = CGSize(width: 375, height: 667)
+        view.frame.size = CGSize(width: 375, height: 812)
         view.backgroundColor = .white
 
         self.view = view
@@ -29,12 +29,15 @@ public class RootViewController : UIViewController, CardCellDelegate {
     private func setupElements() {
         
         // Header label
-        let headerLabel = UILabel(frame: CGRect(x: 0, y: 16, width: self.view.frame.width, height: 40))
-        headerLabel.text = "Indonesia Heritage Card"
-        headerLabel.textColor = .black
+        let headerLabel = UILabel()
+        headerLabel.text = "Indonesia Heritage\nCard"
+        headerLabel.textColor = .white
+        headerLabel.backgroundColor = .red
         headerLabel.textAlignment = .center
         headerLabel.numberOfLines = 0
-        headerLabel.font = UIFont.systemFont(ofSize: 30)
+        headerLabel.font = UIFont.boldSystemFont(ofSize: 35)
+        headerLabel.sizeToFit()
+        headerLabel.frame.size = CGSize(width: self.view.frame.width, height: headerLabel.frame.height)
         
         self.view.addSubview(headerLabel)
         
@@ -44,9 +47,8 @@ public class RootViewController : UIViewController, CardCellDelegate {
         flowLayout.itemSize = CGSize(width: 100, height: 160)
         flowLayout.scrollDirection = .vertical
         
-        cardCollectionView = UICollectionView(frame: CGRect(x: 0, y: headerLabel.frame.maxY + 10, width: self.view.frame.width, height: self.view.frame.height - headerLabel.frame.height - 10), collectionViewLayout: flowLayout)
+        cardCollectionView = UICollectionView(frame: CGRect(x: 0, y: headerLabel.frame.maxY, width: self.view.frame.width, height: self.view.frame.height - headerLabel.frame.height), collectionViewLayout: flowLayout)
         cardCollectionView.backgroundColor = .lightGray
-        print(cardCollectionView.frame)
         cardCollectionView.delegate = self
         cardCollectionView.dataSource = self
         cardCollectionView.register(CardCell.self, forCellWithReuseIdentifier: CardCell.description())
