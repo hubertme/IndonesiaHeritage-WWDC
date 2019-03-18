@@ -4,7 +4,10 @@ import UIKit
 public class CardCell: UICollectionViewCell {
     
     // MARK: - Attributes
-    var cardImage = UIImage()
+    var cardInformation: CardInformation!
+    
+    // MARK: - View Properties
+    var singleCardView: UIView!
     
     // MARK: - Life cycle
     override public init(frame: CGRect) {
@@ -23,8 +26,8 @@ public class CardCell: UICollectionViewCell {
 //        cardButton.backgroundColor = .blue
 //        cardButton
         
-        let singleCardView = UIView(frame: self.contentView.frame)
-        singleCardView.backgroundColor = .black
+        singleCardView = UIView(frame: self.contentView.frame)
+        singleCardView.backgroundColor = .white
         let tapToFlipGesture = UITapGestureRecognizer(target: self, action: #selector(handleCardViewTapped))
         singleCardView.addGestureRecognizer(tapToFlipGesture)
         
@@ -32,6 +35,19 @@ public class CardCell: UICollectionViewCell {
     }
     
     @objc private func handleCardViewTapped() {
-        print("Card tapped!")
+        if !cardInformation.isOpened {
+            UIView.transition(with: singleCardView, duration: 0.5, options: .transitionFlipFromLeft, animations: {
+                self.singleCardView.backgroundColor = .red
+            }) { (_) in
+                // Completion handler
+            }
+        } else {
+            UIView.transition(with: singleCardView, duration: 0.5, options: .transitionFlipFromRight, animations: {
+                self.singleCardView.backgroundColor = .white
+            }) { (_) in
+                // Completion handler
+            }
+        }
+        cardInformation.isOpened = !(cardInformation.isOpened)
     }
 }

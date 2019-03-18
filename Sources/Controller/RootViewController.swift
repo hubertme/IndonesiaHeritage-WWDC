@@ -54,7 +54,7 @@ extension RootViewController: UICollectionViewDataSource {
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cardCell = collectionView.dequeueReusableCell(withReuseIdentifier: CardCell.description(), for: indexPath) as! CardCell
-        cardCell.cardImage = UIImage()
+        cardCell.cardInformation = CardInformation(title: "Test title", description: "Test description")
         print("card at \(indexPath.item) frame: \(cardCell.frame)")
         return cardCell
     }
