@@ -15,6 +15,7 @@ public class CardCell: UICollectionViewCell {
     // MARK: - View Properties
     var singleCardView: UIView!
     var informationView: UIView!
+    var titleLabel: UILabel!
     
     // MARK: - Life cycle
     override public init(frame: CGRect) {
@@ -38,6 +39,18 @@ public class CardCell: UICollectionViewCell {
         self.singleCardView.addGestureRecognizer(tapToFlipGesture)
         
         self.contentView.addSubview(singleCardView)
+        
+        self.titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.contentView.frame.width, height: 20))
+        titleLabel.font = UIFont.systemFont(ofSize: 16)
+        titleLabel.numberOfLines = 1
+        titleLabel.textAlignment = .center
+        titleLabel.textColor = .black
+        titleLabel.backgroundColor = .clear
+        titleLabel.text = cardInformation?.title
+        titleLabel.alpha = 0
+        print(titleLabel.frame, titleLabel.alpha)
+        
+        self.contentView.addSubview(titleLabel)
     }
     
     private func setupInformationView() {
