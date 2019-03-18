@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-class CardInformation {
+public class CardInformation {
     var title: String
     var description: String
     var image: UIImage
