@@ -30,14 +30,14 @@ public class RootViewController : UIViewController, CardCellDelegate {
         
         // Header label
         let headerLabel = UILabel()
-        headerLabel.text = "Indonesia Heritage\nCard"
+        headerLabel.text = "Indonesia Heritage"
         headerLabel.textColor = .white
         headerLabel.backgroundColor = .red
         headerLabel.textAlignment = .center
         headerLabel.numberOfLines = 0
         headerLabel.font = UIFont.boldSystemFont(ofSize: 35)
         headerLabel.sizeToFit()
-        headerLabel.frame.size = CGSize(width: self.view.frame.width, height: headerLabel.frame.height)
+        headerLabel.frame.size = CGSize(width: self.view.frame.width, height: headerLabel.frame.height*2)
         
         self.view.addSubview(headerLabel)
         
@@ -48,7 +48,7 @@ public class RootViewController : UIViewController, CardCellDelegate {
         flowLayout.scrollDirection = .vertical
         
         cardCollectionView = UICollectionView(frame: CGRect(x: 0, y: headerLabel.frame.maxY, width: self.view.frame.width, height: self.view.frame.height - headerLabel.frame.height), collectionViewLayout: flowLayout)
-        cardCollectionView.backgroundColor = .lightGray
+        cardCollectionView.backgroundColor = .white
         cardCollectionView.delegate = self
         cardCollectionView.dataSource = self
         cardCollectionView.register(CardCell.self, forCellWithReuseIdentifier: CardCell.description())
@@ -57,7 +57,7 @@ public class RootViewController : UIViewController, CardCellDelegate {
     }
     
     private func addDummyData() {
-        for i in 1...32 {
+        for i in 1...9 {
             let cardInfo = CardInformation(title: "Card info #\(i)", description: "Lorem ipsum dolor sit amet")
             cardInformationSet.append(cardInfo)
         }
