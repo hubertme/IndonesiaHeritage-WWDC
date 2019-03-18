@@ -3,6 +3,9 @@
 import UIKit
 import PlaygroundSupport
 
+public let screenSize = CGSize(width: 375, height: 812) // iPhone 5.5 Size
+
 // Present the view controller in the Live View window
 let rootVC = RootViewController()
+rootVC.preferredContentSize = screenSize
 PlaygroundPage.current.liveView = rootVC

@@ -6,6 +6,7 @@ public class RootViewController : UIViewController {
     override public func loadView() {
         super.loadView()
         let view = UIView()
+        view.frame.size = CGSize(width: 375, height: 812)
         view.backgroundColor = .white
 
         self.view = view
