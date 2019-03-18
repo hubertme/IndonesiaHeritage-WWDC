@@ -10,6 +10,7 @@ public class CardCell: UICollectionViewCell {
     // MARK: - Attributes
     var indexPath: IndexPath = IndexPath(row: 0, section: 0)
     weak var delegate: CardCellDelegate?
+    var cardInformation: CardInformation?
     
     // MARK: - View Properties
     var singleCardView: UIView!
@@ -26,13 +27,9 @@ public class CardCell: UICollectionViewCell {
     
     // MARK: - Methods
     private func setupElements() {
-//        let cardButton = UIButton(type: .custom)
-//        cardButton.frame = self.contentView.frame
-//        cardButton.backgroundColor = .blue
-//        cardButton
         
         singleCardView = UIView(frame: self.contentView.frame)
-        singleCardView.backgroundColor = .white
+//        singleCardView.backgroundColor = (cardInformation?.isOpened ?? false) ? .red : .white
         let tapToFlipGesture = UITapGestureRecognizer(target: self, action: #selector(handleCardViewTapped))
         singleCardView.addGestureRecognizer(tapToFlipGesture)
         

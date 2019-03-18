@@ -3,6 +3,9 @@ import UIKit
 
 public class RootViewController : UIViewController, CardCellDelegate {
     
+    // MARK: - Attributes
+    var cardInformationSet = [CardInformation]()
+    
     // MARK: - View properties
     var cardCollectionView: UICollectionView!
     
@@ -19,6 +22,7 @@ public class RootViewController : UIViewController, CardCellDelegate {
     public override func viewDidLoad() {
         super.viewDidLoad()
         self.setupElements()
+        self.addDummyData()
     }
     
     // MARK: - Methods
@@ -48,17 +52,26 @@ public class RootViewController : UIViewController, CardCellDelegate {
         
         self.view.addSubview(cardCollectionView)
     }
+    
+    private func addDummyData() {
+        for i in 1...32 {
+            let cardInfo = CardInformation(title: "Card info #\(i)", description: "Lorem ipsum dolor sit amet")
+            cardInformationSet.append(cardInfo)
+        }
+    }
 }
 
 // MARK: - Extensions
 extension RootViewController: UICollectionViewDataSource {
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 16
+        return cardInformationSet.count
     }
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cardCell = collectionView.dequeueReusableCell(withReuseIdentifier: CardCell.description(), for: indexPath) as! CardCell
         cardCell.indexPath = indexPath
+//        cardCell.cardInformation = cardInformationSet[indexPath.item]
+        cardCell.singleCardView.backgroundColor = !(cardInformationSet[indexPath.item].isOpened) ? .white : .red
         cardCell.delegate = self
         print("card at \(indexPath.item) frame: \(cardCell.frame)")
         return cardCell
@@ -66,11 +79,21 @@ extension RootViewController: UICollectionViewDataSource {
     
     public func cardCellTapped(at indexPath: IndexPath) {
         let cardCell = cardCollectionView.cellForItem(at: indexPath) as! CardCell
-        UIView.transition(with: cardCell.singleCardView, duration: 0.5, options: .transitionFlipFromLeft, animations: {
-            cardCell.singleCardView.backgroundColor = .red
-        }) { (_) in
-            // Completion handler
+        
+        if !cardInformationSet[indexPath.item].isOpened {
+            UIView.transition(with: cardCell.singleCardView, duration: 0.5, options: .transitionFlipFromLeft, animations: {
+                cardCell.singleCardView.backgroundColor = .red
+            }) { (_) in
+                // Completion handler
+            }
+        } else {
+            UIView.transition(with: cardCell.singleCardView, duration: 0.5, options: .transitionFlipFromRight, animations: {
+                cardCell.singleCardView.backgroundColor = .white
+            }) { (_) in
+                // Completion handler
+            }
         }
+        cardInformationSet[indexPath.item].isOpened = !(cardInformationSet[indexPath.item].isOpened)
     }
 }
 
