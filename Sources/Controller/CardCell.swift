@@ -14,11 +14,13 @@ public class CardCell: UICollectionViewCell {
     
     // MARK: - View Properties
     var singleCardView: UIView!
+    var informationView: UIView!
     
     // MARK: - Life cycle
     override public init(frame: CGRect) {
         super.init(frame: frame)
         self.setupElements()
+        self.setupInformationView()
     }
     
     public required init?(coder aDecoder: NSCoder) {
@@ -28,14 +30,23 @@ public class CardCell: UICollectionViewCell {
     // MARK: - Methods
     private func setupElements() {
         
-        singleCardView = UIView(frame: self.contentView.frame)
-        singleCardView.clipsToBounds = true
-        singleCardView.layer.cornerRadius = 8
-        singleCardView.contentMode = .scaleAspectFit
+        self.singleCardView = UIView(frame: self.contentView.frame)
+        self.singleCardView.clipsToBounds = true
+        self.singleCardView.layer.cornerRadius = 8
+        self.singleCardView.contentMode = .scaleAspectFit
         let tapToFlipGesture = UITapGestureRecognizer(target: self, action: #selector(handleCardViewTapped))
-        singleCardView.addGestureRecognizer(tapToFlipGesture)
+        self.singleCardView.addGestureRecognizer(tapToFlipGesture)
         
         self.contentView.addSubview(singleCardView)
+    }
+    
+    private func setupInformationView() {
+        
+        self.informationView = UIView(frame: self.contentView.frame)
+        self.informationView.alpha = 0
+        self.informationView.layer.cornerRadius = 8
+        self.informationView.backgroundColor = .darkGray
+        
     }
     
     @objc private func handleCardViewTapped() {
