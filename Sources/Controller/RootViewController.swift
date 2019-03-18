@@ -1,10 +1,12 @@
 import Foundation
 import UIKit
 
-public class RootViewController : UIViewController {
+public class RootViewController : UIViewController, CardCellDelegate {
     
+    // MARK: - View properties
     var cardCollectionView: UICollectionView!
     
+    // MARK: - Life cycle
     override public func loadView() {
         super.loadView()
         let view = UIView()
@@ -19,6 +21,7 @@ public class RootViewController : UIViewController {
         self.setupElements()
     }
     
+    // MARK: - Methods
     private func setupElements() {
         // Header label
         let headerLabel = UILabel(frame: CGRect(x: 0, y: 16, width: self.view.frame.width, height: 40))
@@ -47,6 +50,7 @@ public class RootViewController : UIViewController {
     }
 }
 
+// MARK: - Extensions
 extension RootViewController: UICollectionViewDataSource {
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 16
@@ -54,14 +58,22 @@ extension RootViewController: UICollectionViewDataSource {
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cardCell = collectionView.dequeueReusableCell(withReuseIdentifier: CardCell.description(), for: indexPath) as! CardCell
-        cardCell.cardInformation = CardInformation(title: "Test title", description: "Test description")
+        cardCell.indexPath = indexPath
+        cardCell.delegate = self
         print("card at \(indexPath.item) frame: \(cardCell.frame)")
         return cardCell
+    }
+    
+    public func cardCellTapped(at indexPath: IndexPath) {
+        let cardCell = cardCollectionView.cellForItem(at: indexPath) as! CardCell
+        UIView.transition(with: cardCell.singleCardView, duration: 0.5, options: .transitionFlipFromLeft, animations: {
+            cardCell.singleCardView.backgroundColor = .red
+        }) { (_) in
+            // Completion handler
+        }
     }
 }
 
 extension RootViewController: UICollectionViewDelegateFlowLayout {
-    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("Selected at indexPath \(indexPath)")
-    }
+    
 }

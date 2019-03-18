@@ -1,10 +1,15 @@
 import Foundation
 import UIKit
 
+protocol CardCellDelegate: class {
+    func cardCellTapped(at indexPath: IndexPath)
+}
+
 public class CardCell: UICollectionViewCell {
     
     // MARK: - Attributes
-    var cardInformation: CardInformation!
+    var indexPath: IndexPath = IndexPath(row: 0, section: 0)
+    weak var delegate: CardCellDelegate?
     
     // MARK: - View Properties
     var singleCardView: UIView!
@@ -35,19 +40,6 @@ public class CardCell: UICollectionViewCell {
     }
     
     @objc private func handleCardViewTapped() {
-        if !cardInformation.isOpened {
-            UIView.transition(with: singleCardView, duration: 0.5, options: .transitionFlipFromLeft, animations: {
-                self.singleCardView.backgroundColor = .red
-            }) { (_) in
-                // Completion handler
-            }
-        } else {
-            UIView.transition(with: singleCardView, duration: 0.5, options: .transitionFlipFromRight, animations: {
-                self.singleCardView.backgroundColor = .white
-            }) { (_) in
-                // Completion handler
-            }
-        }
-        cardInformation.isOpened = !(cardInformation.isOpened)
+        delegate?.cardCellTapped(at: self.indexPath)
     }
 }
