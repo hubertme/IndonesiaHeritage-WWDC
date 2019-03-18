@@ -5,15 +5,6 @@ public class RootViewController : UIViewController {
     
     var cardCollectionView: UICollectionView!
     
-//    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-//        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-//
-//    }
-//
-//    public required init?(coder aDecoder: NSCoder) {
-//        fatalError("Init has not been implemented")
-//    }
-    
     override public func loadView() {
         super.loadView()
         let view = UIView()
@@ -25,12 +16,6 @@ public class RootViewController : UIViewController {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-//        let label = UILabel()
-//        label.frame = CGRect(x: 150, y: 200, width: 200, height: 20)
-//        label.text = "Hello World!"
-//        label.textColor = .black
-//
-//        view.addSubview(label)
         self.setupElements()
     }
     
@@ -41,10 +26,11 @@ public class RootViewController : UIViewController {
         flowLayout.itemSize = CGSize(width: 80, height: 200)
         
         cardCollectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: flowLayout)
-        cardCollectionView.backgroundColor = .blue
+        cardCollectionView.backgroundColor = .clear
         print(cardCollectionView.frame)
         cardCollectionView.delegate = self
         cardCollectionView.dataSource = self
+        cardCollectionView.register(CardCell.self, forCellWithReuseIdentifier: CardCell.description())
         
         self.view.addSubview(cardCollectionView)
     }
@@ -52,11 +38,14 @@ public class RootViewController : UIViewController {
 
 extension RootViewController: UICollectionViewDataSource {
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 0
+        return 1
     }
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return UICollectionViewCell()
+        let cardCell = collectionView.dequeueReusableCell(withReuseIdentifier: CardCell.description(), for: indexPath) as! CardCell
+        cardCell.cardImage = UIImage()
+        print(cardCell.frame)
+        return cardCell
     }
 }
 
