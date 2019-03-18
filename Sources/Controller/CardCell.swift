@@ -29,7 +29,9 @@ public class CardCell: UICollectionViewCell {
     private func setupElements() {
         
         singleCardView = UIView(frame: self.contentView.frame)
-//        singleCardView.backgroundColor = (cardInformation?.isOpened ?? false) ? .red : .white
+        singleCardView.clipsToBounds = true
+        singleCardView.layer.cornerRadius = 8
+        singleCardView.contentMode = .scaleAspectFit
         let tapToFlipGesture = UITapGestureRecognizer(target: self, action: #selector(handleCardViewTapped))
         singleCardView.addGestureRecognizer(tapToFlipGesture)
         

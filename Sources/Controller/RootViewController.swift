@@ -72,9 +72,9 @@ extension RootViewController: UICollectionViewDataSource {
         let cardCell = collectionView.dequeueReusableCell(withReuseIdentifier: CardCell.description(), for: indexPath) as! CardCell
         cardCell.indexPath = indexPath
 //        cardCell.cardInformation = cardInformationSet[indexPath.item]
-        cardCell.singleCardView.backgroundColor = !(cardInformationSet[indexPath.item].isOpened) ? .white : .red
+//        cardCell.singleCardView.backgroundColor = !(cardInformationSet[indexPath.item].isOpened) ? .white : .red
+        cardCell.singleCardView.backgroundColor = !(cardInformationSet[indexPath.item].isOpened) ? UIColor(patternImage: UIImage(named: "card-back.jpg")!) : .red
         cardCell.delegate = self
-        print("card at \(indexPath.item) frame: \(cardCell.frame)")
         return cardCell
     }
     
@@ -89,11 +89,12 @@ extension RootViewController: UICollectionViewDataSource {
             }
         } else {
             UIView.transition(with: cardCell.singleCardView, duration: 0.5, options: .transitionFlipFromRight, animations: {
-                cardCell.singleCardView.backgroundColor = .white
+                cardCell.singleCardView.backgroundColor = UIColor(patternImage: UIImage(named: "card-back.jpg")!)
             }) { (_) in
                 // Completion handler
             }
         }
+        
         cardInformationSet[indexPath.item].isOpened = !(cardInformationSet[indexPath.item].isOpened)
     }
 }
