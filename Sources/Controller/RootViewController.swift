@@ -13,7 +13,7 @@ public class RootViewController : UIViewController, CardCellDelegate {
     override public func loadView() {
         super.loadView()
         let view = UIView()
-        view.frame.size = CGSize(width: 375, height: 812)
+        view.frame.size = CGSize(width: 375, height: 667)
         view.backgroundColor = .white
 
         self.view = view
@@ -27,6 +27,7 @@ public class RootViewController : UIViewController, CardCellDelegate {
     
     // MARK: - Methods
     private func setupElements() {
+        
         // Header label
         let headerLabel = UILabel(frame: CGRect(x: 0, y: 16, width: self.view.frame.width, height: 40))
         headerLabel.text = "Indonesia Heritage Card"
@@ -39,7 +40,7 @@ public class RootViewController : UIViewController, CardCellDelegate {
         
         // Collection view
         let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.sectionInset = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16)
+        flowLayout.sectionInset = UIEdgeInsets(top: 8, left: 16, bottom: 20, right: 16)
         flowLayout.itemSize = CGSize(width: 100, height: 160)
         flowLayout.scrollDirection = .vertical
         
