@@ -32,8 +32,8 @@ public class RootViewController : UIViewController {
         
         // Collection view
         let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        flowLayout.itemSize = CGSize(width: 80, height: 200)
+        flowLayout.sectionInset = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16)
+        flowLayout.itemSize = CGSize(width: 100, height: 160)
         flowLayout.scrollDirection = .vertical
         
         cardCollectionView = UICollectionView(frame: CGRect(x: 0, y: headerLabel.frame.maxY + 10, width: self.view.frame.width, height: self.view.frame.height - headerLabel.frame.height - 10), collectionViewLayout: flowLayout)
@@ -49,13 +49,13 @@ public class RootViewController : UIViewController {
 
 extension RootViewController: UICollectionViewDataSource {
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return 16
     }
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cardCell = collectionView.dequeueReusableCell(withReuseIdentifier: CardCell.description(), for: indexPath) as! CardCell
         cardCell.cardImage = UIImage()
-        print(cardCell.frame)
+        print("card at \(indexPath.item) frame: \(cardCell.frame)")
         return cardCell
     }
 }
