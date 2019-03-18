@@ -86,8 +86,8 @@ extension RootViewController: UICollectionViewDataSource {
         if !cardInformationSet[indexPath.item].isOpened {
             UIView.transition(with: cardCell.singleCardView, duration: 0.5, options: .transitionFlipFromLeft, animations: {
                 cardCell.singleCardView.backgroundColor = .red
-                cardCell.transform = CGAffineTransform(scaleX: 2, y: 2)
-                cardCell.center = self.view.center
+//                cardCell.transform = CGAffineTransform(scaleX: 2, y: 2)
+//                cardCell.center = self.view.center
                 self.view.bringSubviewToFront(cardCell)
             }) { (_) in
                 // Completion handler
