@@ -86,14 +86,19 @@ extension RootViewController: UICollectionViewDataSource {
         if !cardInformationSet[indexPath.item].isOpened {
             UIView.transition(with: cardCell.singleCardView, duration: 0.5, options: .transitionFlipFromLeft, animations: {
                 cardCell.singleCardView.backgroundColor = .red
+                cardCell.transform = CGAffineTransform(scaleX: 2, y: 2)
+                cardCell.center = self.view.center
+                self.view.bringSubviewToFront(cardCell)
             }) { (_) in
                 // Completion handler
             }
         } else {
             UIView.transition(with: cardCell.singleCardView, duration: 0.5, options: .transitionFlipFromRight, animations: {
                 cardCell.singleCardView.backgroundColor = UIColor(patternImage: UIImage(named: "card-back.jpg")!)
+                cardCell.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+                cardCell.center = CGPoint(x: self.cardCollectionView.frame.maxX - cardCell.frame.width/2 - 20, y: self.cardCollectionView.frame.minY + cardCell.frame.height/2 + 30)
             }) { (_) in
-                // Completion handler
+                cardCell.isUserInteractionEnabled = false
             }
         }
         
