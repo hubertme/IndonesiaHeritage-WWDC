@@ -21,7 +21,6 @@ public class CardCell: UICollectionViewCell {
     override public init(frame: CGRect) {
         super.init(frame: frame)
         self.setupElements()
-        self.setupInformationView()
     }
     
     public required init?(coder aDecoder: NSCoder) {
@@ -48,18 +47,8 @@ public class CardCell: UICollectionViewCell {
         titleLabel.backgroundColor = .clear
         titleLabel.text = cardInformation?.title
         titleLabel.alpha = 0
-        print(titleLabel.frame, titleLabel.alpha)
         
         self.contentView.addSubview(titleLabel)
-    }
-    
-    private func setupInformationView() {
-        
-        self.informationView = UIView(frame: self.contentView.frame)
-        self.informationView.alpha = 0
-        self.informationView.layer.cornerRadius = 8
-        self.informationView.backgroundColor = .darkGray
-        
     }
     
     @objc private func handleCardViewTapped() {

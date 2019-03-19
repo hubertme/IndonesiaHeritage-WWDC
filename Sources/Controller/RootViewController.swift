@@ -10,6 +10,8 @@ public class RootViewController : UIViewController, CardCellDelegate {
     
     // MARK: - View properties
     var cardCollectionView: UICollectionView!
+    var informationView: UIView!
+    var headerLabel: UILabel!
     
     // MARK: - Life cycle
     override public func loadView() {
@@ -35,7 +37,7 @@ public class RootViewController : UIViewController, CardCellDelegate {
     private func setupElements() {
         
         // Header label
-        let headerLabel = UILabel()
+        headerLabel = UILabel()
         headerLabel.text = "Indonesian Heritage"
         headerLabel.textColor = .white
         headerLabel.backgroundColor = .red
@@ -66,12 +68,18 @@ public class RootViewController : UIViewController, CardCellDelegate {
     }
     
     private func setupInformationView() {
-        informationView = UIView()
-        informationView.frame = self.view.frame
-        informationView.backgroundColor = .darkGray
+        self.informationView = UIView()
+        self.informationView.frame = self.view.frame
+        self.informationView.backgroundColor = .darkGray
         
-        let informationTitleLabel = UILabel()
+        let closeButton = UIButton(type: .system)
+        closeButton.frame = CGRect(x: self.informationView.frame.maxX - 70, y: self.informationView.frame.minY + 30, width: 50, height: 30)
+        closeButton.setTitle("Close", for: .normal)
+        closeButton.setTitleColor(.white, for: .normal)
         
+        print("Close button frame: \(closeButton.frame) and information view frame: \(self.informationView.frame)")
+        self.informationView.addSubview(closeButton)
+        self.view.addSubview(self.informationView)
     }
 }
 
