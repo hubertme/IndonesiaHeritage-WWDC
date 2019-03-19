@@ -68,17 +68,8 @@ public class RootViewController : UIViewController, CardCellDelegate {
     }
     
     private func setupInformationView() {
-        self.informationView = UIView()
-        self.informationView.frame = self.view.frame
-        self.informationView.backgroundColor = .darkGray
+        self.informationView = InformationView(frame: self.view.frame, title: "Something", information: "Something also", image: UIImage(named: "card-back.jpg") ?? UIImage())
         
-        let closeButton = UIButton(type: .system)
-        closeButton.frame = CGRect(x: self.informationView.frame.maxX - 70, y: self.informationView.frame.minY + 30, width: 50, height: 30)
-        closeButton.setTitle("Close", for: .normal)
-        closeButton.setTitleColor(.white, for: .normal)
-        
-        print("Close button frame: \(closeButton.frame) and information view frame: \(self.informationView.frame)")
-        self.informationView.addSubview(closeButton)
         self.view.addSubview(self.informationView)
     }
 }
