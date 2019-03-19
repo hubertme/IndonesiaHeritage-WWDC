@@ -25,8 +25,8 @@ public class RootViewController : UIViewController, CardCellDelegate {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        self.setupElements()
         self.addDummyData()
+        self.setupElements()
         
         self.cardInformationSet.forEach { (cardInfo) in
             print(cardInfo.title)
@@ -68,7 +68,7 @@ public class RootViewController : UIViewController, CardCellDelegate {
     }
     
     private func setupInformationView() {
-        self.informationView = InformationView(frame: self.view.frame, title: "Something", information: "Something also", image: UIImage(named: "card-back.jpg") ?? UIImage())
+        self.informationView = InformationView(frame: self.view.frame, title: "Something", information: self.cardInformationSet[0].description, image: UIImage(named: "card-back.jpg") ?? UIImage())
         
         self.view.addSubview(self.informationView)
     }
