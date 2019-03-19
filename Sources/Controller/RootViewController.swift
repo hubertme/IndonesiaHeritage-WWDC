@@ -64,7 +64,7 @@ public class RootViewController : UIViewController, CardCellDelegate {
         self.view.addSubview(cardCollectionView)
         
         // Information view
-        self.setupInformationView()
+//        self.setupInformationView()
     }
     
     private func setupInformationView() {
@@ -106,6 +106,12 @@ extension RootViewController: UICollectionViewDataSource {
                         print("match!")
                         self.resizeAndStackCardView(sender: cardCell)
                         self.resizeAndStackCardView(sender: self.cardCollectionView.cellForItem(at: previousIndexPath) as! CardCell)
+                        
+                        let informationViewImage = UIImage(named: "card-\((self.cardInformationSet[indexPath.item].title).lowercased()).jpg") ?? UIImage()
+                        self.informationView = InformationView(frame: self.view.frame, title: currentCardInfo.title, information: currentCardInfo.description, image: informationViewImage)
+                        
+                        self.view.addSubview(self.informationView)
+                        
                     } else {
                         self.flipBackCardView(sender: cardCell)
                         self.flipBackCardView(sender: self.cardCollectionView.cellForItem(at: previousIndexPath) as! CardCell)
