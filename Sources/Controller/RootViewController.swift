@@ -109,8 +109,12 @@ extension RootViewController: UICollectionViewDataSource {
                         
                         let informationViewImage = UIImage(named: "card-\((self.cardInformationSet[indexPath.item].title).lowercased()).jpg") ?? UIImage()
                         self.informationView = InformationView(frame: self.view.frame, title: currentCardInfo.title, information: currentCardInfo.description, image: informationViewImage)
-                        
+                        self.informationView.alpha = 0
                         self.view.addSubview(self.informationView)
+                        
+                        UIView.animate(withDuration: 0.5, animations: {
+                            self.informationView.alpha = 1
+                        })
                         
                     } else {
                         self.flipBackCardView(sender: cardCell)
