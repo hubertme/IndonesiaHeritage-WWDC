@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-extension RootViewController {
+extension GameplayViewController {
     func addDummyData() {
         cardInformationSet.append(CardInformation(title: "Batik", description: "Batik is a technique of wax-resist dyeing applied to whole cloth, or cloth made using this technique, originated from Indonesia, Batik is made either by drawing dots and lines of the resist with a spouted tool called a canting, or by printing the resist with a copper stamp called a cap. The applied wax resists dyes and therefore allows the artisan to colour selectively by soaking the cloth in one colour, removing the wax with boiling water, and repeating if multiple colours are desired.\n(copyright of Wikipedia)"))
         cardInformationSet.append(CardInformation(title: "Kecak", description: "Kecak dance, known in Indonesian as Tari Kecak, is a form of Balinese hindu dance and music drama that was developed in the 1930s in Bali, Indonesia. Since its creation it has been performed primarily by men, with the very first women's kecak group starting in 2006. The dance mainly plays about the Ramayana and is traditionally performed in temples and villages across Bali.\n(copyright of Wikipedia)"))

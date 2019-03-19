@@ -2,7 +2,7 @@ import Foundation
 import UIKit
 import AVFoundation
 
-public class RootViewController : UIViewController, CardCellDelegate {
+public class GameplayViewController : UIViewController, CardCellDelegate {
     
     // MARK: - Attributes
     var cardInformationSet = [CardInformation]()
@@ -81,7 +81,7 @@ public class RootViewController : UIViewController, CardCellDelegate {
 }
 
 // MARK: - Extensions
-extension RootViewController: UICollectionViewDataSource {
+extension GameplayViewController: UICollectionViewDataSource {
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return cardInformationSet.count
     }
@@ -127,7 +127,6 @@ extension RootViewController: UICollectionViewDataSource {
                         UIView.animate(withDuration: 0.5, animations: {
                             self.informationView.alpha = 1
                         }, completion: { (_) in
-                            // FIXME:
                             self.cardCollectionView.isUserInteractionEnabled = true
                         })
                         
@@ -169,18 +168,16 @@ extension RootViewController: UICollectionViewDataSource {
             sender.singleCardView.backgroundColor = UIColor(patternImage: UIImage(named: "card-back.jpg")!)
         }) { (_) in
             self.previousCardInfo = nil
-            // FIXME:
-//            self.cardCollectionView.isUserInteractionEnabled = true
         }
     }
 }
 
-extension RootViewController: UICollectionViewDelegateFlowLayout {
+extension GameplayViewController: UICollectionViewDelegateFlowLayout {
     
 }
 
 // Delegate for information view
-extension RootViewController: InformationViewDelegate {
+extension GameplayViewController: InformationViewDelegate {
     func handleCloseButtonTapped() {
         print("Close button tapped!")
         self.informationView.removeFromSuperview()
