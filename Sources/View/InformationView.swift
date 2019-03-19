@@ -17,6 +17,7 @@ public class InformationView: UIView {
         closeButton.frame = CGRect(x: self.frame.maxX - 70, y: self.frame.minY + 30, width: 50, height: 30)
         closeButton.setTitle("Close", for: .normal)
         closeButton.setTitleColor(.white, for: .normal)
+        closeButton.addTarget(self, action: #selector(handleCloseButtonTapped), for: .touchUpInside)
         
         print("Close button frame: \(closeButton.frame) and information view frame: \(self.frame)")
         self.addSubview(closeButton)
@@ -36,4 +37,12 @@ public class InformationView: UIView {
     }
     
     // MARK: - Methods
+    @objc private func handleCloseButtonTapped() {
+        UIView.animate(withDuration: 0.5, animations: {
+            self.alpha = 0
+        }) { (_) in
+            // Animation completion handler
+            // Delegate to remove subview from parent view
+        }
+    }
 }

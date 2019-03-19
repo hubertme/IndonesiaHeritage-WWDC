@@ -151,3 +151,8 @@ extension RootViewController: UICollectionViewDataSource {
 extension RootViewController: UICollectionViewDelegateFlowLayout {
     
 }
+
+// Delegate for information view
+extension RootViewController {
+    
+}
