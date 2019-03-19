@@ -10,8 +10,9 @@ public class GameplayViewController : UIViewController, CardCellDelegate {
     
     // MARK: - View properties
     var cardCollectionView: UICollectionView!
-    var informationView: UIView!
+    var informationView: InformationView!
     var headerLabel: UILabel!
+    var postGameplayView: PostGameplayView!
     
     // MARK: - Life cycle
     override public func loadView() {
@@ -162,12 +163,16 @@ extension GameplayViewController: UICollectionViewDataSource {
         let postGameplayView = PostGameplayView(frame: self.cardCollectionView.frame)
         postGameplayView.alpha = 0
         postGameplayView.delegate = self
+        print(postGameplayView.delegate)
+        
+        self.postGameplayView = postGameplayView
+        print(postGameplayView.delegate)
         self.cardCollectionView.removeFromSuperview()
         
-        self.view.addSubview(postGameplayView)
+        self.view.addSubview(self.postGameplayView)
         
         UIView.animate(withDuration: 2, animations: {
-            postGameplayView.alpha = 1
+            self.postGameplayView.alpha = 1
         }, completion: { (_) in
             // Completion handler
         })
@@ -193,7 +198,7 @@ extension GameplayViewController: InformationViewDelegate {
 // Delegate for post gameplay
 extension GameplayViewController: PostGameplayViewDelegate {
     func setupWinningAnimation() {
-        // Some animation
-        print("Delegate method called!")
+        print("Winning animation")
+        
     }
 }
