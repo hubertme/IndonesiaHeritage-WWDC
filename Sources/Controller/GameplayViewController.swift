@@ -100,6 +100,7 @@ extension GameplayViewController: UICollectionViewDataSource {
                         print("match!")
                         self.resizeAndStackCardView(sender: cardCell)
                         self.resizeAndStackCardView(sender: self.cardCollectionView.cellForItem(at: previousIndexPath) as! CardCell)
+                        self.cardsFinished+=1
                         
                         let informationViewImage = UIImage(named: "info-\((self.cardInformationSet[indexPath.item].title).lowercased()).jpg") ?? UIImage()
                         let informationView = InformationView(frame: self.view.frame, title: currentCardInfo.title, information: currentCardInfo.description, image: informationViewImage)
@@ -114,6 +115,8 @@ extension GameplayViewController: UICollectionViewDataSource {
                         }, completion: { (_) in
                             self.cardCollectionView.isUserInteractionEnabled = true
                         })
+                        
+                        print("Finished \(self.cardsFinished)")
                         
                     } else {
                         self.flipBackCardView(sender: cardCell)
@@ -143,7 +146,6 @@ extension GameplayViewController: UICollectionViewDataSource {
             sender.alpha = 0
         }) { (_) in
             sender.isUserInteractionEnabled = false
-            self.cardsFinished+=1
             self.previousCardInfo = nil
         }
     }
@@ -154,6 +156,20 @@ extension GameplayViewController: UICollectionViewDataSource {
         }) { (_) in
             self.previousCardInfo = nil
         }
+    }
+    
+    private func setupPostGameplay() {
+        let postGameplayView = PostGameplayView(frame: self.cardCollectionView.frame)
+        postGameplayView.alpha = 0
+        self.cardCollectionView.removeFromSuperview()
+        
+        self.view.addSubview(postGameplayView)
+        
+        UIView.animate(withDuration: 2, animations: {
+            postGameplayView.alpha = 1
+        }, completion: { (_) in
+            // Completion handler
+        })
     }
 }
 
@@ -166,5 +182,9 @@ extension GameplayViewController: InformationViewDelegate {
     func handleCloseButtonTapped() {
         print("Close button tapped!")
         self.informationView.removeFromSuperview()
+        
+        if Int(exactly: self.cardsFinished) == self.cardInformationSet.count/2 {
+            self.setupPostGameplay()
+        }
     }
 }
