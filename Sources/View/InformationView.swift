@@ -29,6 +29,7 @@ public class InformationView: UIView {
         self.closeButton.setTitle("Close", for: .normal)
         self.closeButton.setTitleColor(.white, for: .normal)
         self.closeButton.addTarget(self, action: #selector(handleCloseButtonTapped), for: .touchUpInside)
+        self.closeButton.alpha = 0
         
         self.addSubview(self.closeButton)
     }
@@ -45,8 +46,20 @@ public class InformationView: UIView {
         self.image = image
         
         self.setupElements()
-        
-//        print(self.title, self.information, self.image)
+        UIView.animateKeyframes(withDuration: 4, delay: 0, options: .calculationModeLinear, animations: {
+            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.15, animations: {
+                self.titleLabel.alpha = 1
+            })
+            UIView.addKeyframe(withRelativeStartTime: 0.15, relativeDuration: 0.15, animations: {
+                self.imageView.alpha = 1
+            })
+            UIView.addKeyframe(withRelativeStartTime: 0.3, relativeDuration: 0.15, animations: {
+                self.informationLabel.alpha = 1
+            })
+            UIView.addKeyframe(withRelativeStartTime: 0.85, relativeDuration: 0.15, animations: {
+                self.closeButton.alpha = 1
+            })
+        }, completion: nil)
     }
     
     // MARK: - Methods
@@ -68,6 +81,7 @@ public class InformationView: UIView {
         self.titleLabel.textAlignment = .center
         self.titleLabel.text = self.title
         self.titleLabel.numberOfLines = 1
+        self.titleLabel.alpha = 0
         
         self.addSubview(self.titleLabel)
         
@@ -79,6 +93,7 @@ public class InformationView: UIView {
         self.imageView.contentMode = .scaleAspectFit
         self.imageView.clipsToBounds = true
         self.imageView.backgroundColor = .clear
+        self.imageView.alpha = 0
         
         self.addSubview(self.imageView)
         
@@ -90,6 +105,7 @@ public class InformationView: UIView {
         self.informationLabel.text = self.information
         self.informationLabel.numberOfLines = 0
         self.informationLabel.sizeToFit()
+        self.informationLabel.alpha = 0
         
         self.addSubview(self.informationLabel)
     }
