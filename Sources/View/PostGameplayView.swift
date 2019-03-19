@@ -1,10 +1,15 @@
 import Foundation
 import UIKit
 
+protocol PostGameplayViewDelegate: class {
+    func setupWinningAnimation()
+}
+
 public class PostGameplayView: UIView {
     
     // MARK: - Outlets
     var headerLabel: UILabel!
+    weak var delegate: PostGameplayViewDelegate?
     
     // MARK: - Lifecycle
     public override init(frame: CGRect) {
@@ -12,6 +17,7 @@ public class PostGameplayView: UIView {
         
         self.backgroundColor = #colorLiteral(red: 0.1183903292, green: 0.6762167215, blue: 1, alpha: 0.2286494007)
         self.setupElements()
+        self.delegate?.setupWinningAnimation()
     }
     
     public required init?(coder aDecoder: NSCoder) {

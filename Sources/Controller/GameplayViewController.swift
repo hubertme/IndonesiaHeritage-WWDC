@@ -188,3 +188,11 @@ extension GameplayViewController: InformationViewDelegate {
         }
     }
 }
+
+// Delegate for post gameplay
+extension GameplayViewController: PostGameplayViewDelegate {
+    func setupWinningAnimation() {
+        // Some animation
+        print("Delegate method called!")
+    }
+}

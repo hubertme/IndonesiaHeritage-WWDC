@@ -24,6 +24,8 @@ public class PrologueViewController: UIViewController {
         super.viewDidLoad()
         self.playMusic()
         self.setupElements()
+        
+        self.view.addSubview(PostGameplayView())
     }
     
     // MARK: - Methods
