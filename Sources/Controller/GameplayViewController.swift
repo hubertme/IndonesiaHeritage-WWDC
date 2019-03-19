@@ -56,11 +56,11 @@ public class GameplayViewController : UIViewController, CardCellDelegate {
         flowLayout.itemSize = CGSize(width: 100, height: 160)
         flowLayout.scrollDirection = .vertical
         
-        cardCollectionView = UICollectionView(frame: CGRect(x: 0, y: headerLabel.frame.maxY, width: self.view.frame.width, height: self.view.frame.height - headerLabel.frame.height), collectionViewLayout: flowLayout)
-        cardCollectionView.backgroundColor = .white
-        cardCollectionView.delegate = self
-        cardCollectionView.dataSource = self
-        cardCollectionView.register(CardCell.self, forCellWithReuseIdentifier: CardCell.description())
+        self.cardCollectionView = UICollectionView(frame: CGRect(x: 0, y: headerLabel.frame.maxY, width: self.view.frame.width, height: self.view.frame.height - headerLabel.frame.height), collectionViewLayout: flowLayout)
+        self.cardCollectionView.backgroundColor = .white
+        self.cardCollectionView.delegate = self
+        self.cardCollectionView.dataSource = self
+        self.cardCollectionView.register(CardCell.self, forCellWithReuseIdentifier: CardCell.description())
         
         self.view.addSubview(cardCollectionView)
     }
