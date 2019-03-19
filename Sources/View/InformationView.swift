@@ -56,27 +56,35 @@ public class InformationView: UIView {
     
     private func setupElements() {
         // Title label
-        titleLabel = UILabel(frame: CGRect(x: 16, y: self.closeButton.frame.maxY + 16, width: self.frame.width - 32, height: 50))
-        titleLabel.textColor = .white
-        titleLabel.font = UIFont.systemFont(ofSize: 30, weight: .bold)
-        titleLabel.textAlignment = .center
-        titleLabel.text = self.title
-        titleLabel.numberOfLines = 1
+        self.titleLabel = UILabel(frame: CGRect(x: 16, y: self.closeButton.frame.maxY + 16, width: self.frame.width - 32, height: 50))
+        self.titleLabel.textColor = .white
+        self.titleLabel.font = UIFont.systemFont(ofSize: 30, weight: .bold)
+        self.titleLabel.textAlignment = .center
+        self.titleLabel.text = self.title
+        self.titleLabel.numberOfLines = 1
         
-        self.addSubview(titleLabel)
+        self.addSubview(self.titleLabel)
         
         // Image view
-        informationLabel = UILabel(frame: CGRect(x: 16, y: self.titleLabel.frame.maxY + 16, width: self.frame.width - 32, height: 0))
-        informationLabel.textColor = .white
-        informationLabel.font = UIFont.systemFont(ofSize: 18, weight: .light)
-        informationLabel.textAlignment = .center
-        informationLabel.text = self.information
-        informationLabel.numberOfLines = 0
-        informationLabel.sizeToFit()
-        print("Information label frame \(self.informationLabel.frame) and text \(self.information)")
+        let imageViewHeight: CGFloat = 275.0
+        self.imageView = UIImageView(image: self.image)
+        self.imageView.frame.size = CGSize(width: 400, height: imageViewHeight)
+        self.imageView.center = CGPoint(x: self.center.x, y: self.titleLabel.frame.maxY + 16 + imageViewHeight/2)
+        self.imageView.contentMode = .scaleAspectFit
+        self.imageView.clipsToBounds = true
+        self.imageView.backgroundColor = .clear
         
-        self.addSubview(informationLabel)
+        self.addSubview(self.imageView)
         
         // Information label
+        self.informationLabel = UILabel(frame: CGRect(x: 16, y: self.imageView.frame.maxY + 16, width: self.frame.width - 32, height: 0))
+        self.informationLabel.textColor = .white
+        self.informationLabel.font = UIFont.systemFont(ofSize: 18, weight: .light)
+        self.informationLabel.textAlignment = .center
+        self.informationLabel.text = self.information
+        self.informationLabel.numberOfLines = 0
+        self.informationLabel.sizeToFit()
+        
+        self.addSubview(self.informationLabel)
     }
 }
