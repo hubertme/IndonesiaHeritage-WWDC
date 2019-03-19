@@ -107,7 +107,7 @@ extension RootViewController: UICollectionViewDataSource {
                         self.resizeAndStackCardView(sender: cardCell)
                         self.resizeAndStackCardView(sender: self.cardCollectionView.cellForItem(at: previousIndexPath) as! CardCell)
                         
-                        let informationViewImage = UIImage(named: "card-\((self.cardInformationSet[indexPath.item].title).lowercased()).jpg") ?? UIImage()
+                        let informationViewImage = UIImage(named: "info-\((self.cardInformationSet[indexPath.item].title).lowercased()).jpg") ?? UIImage()
                         let informationView = InformationView(frame: self.view.frame, title: currentCardInfo.title, information: currentCardInfo.description, image: informationViewImage)
                         informationView.delegate = self
                         informationView.alpha = 0
