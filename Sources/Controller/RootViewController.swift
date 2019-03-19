@@ -96,7 +96,6 @@ extension RootViewController: UICollectionViewDataSource {
         if !cardInformationSet[indexPath.item].isOpened {
             UIView.transition(with: cardCell.singleCardView, duration: 0.5, options: .transitionFlipFromLeft, animations: {
                 cardCell.singleCardView.backgroundColor = UIColor(patternImage: UIImage(named: "card-\((self.cardInformationSet[indexPath.item].title).lowercased()).jpg") ?? UIImage())
-                cardCell.titleLabel.alpha = 1
             }) { (_) in
                 self.cardInformationSet[indexPath.item].isOpened = !(self.cardInformationSet[indexPath.item].isOpened)
                 let currentCardInfo = self.cardInformationSet[indexPath.item]
@@ -128,7 +127,6 @@ extension RootViewController: UICollectionViewDataSource {
             sender.singleCardView.backgroundColor = UIColor(patternImage: UIImage(named: "card-back.jpg")!)
             sender.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
             sender.center = CGPoint(x: self.cardCollectionView.frame.maxX - sender.frame.width/2 - 20.0 - 10*self.cardsFinished, y: self.cardCollectionView.frame.minY + sender.frame.height/2 + 30.0)
-            sender.titleLabel.alpha = 0
             self.view.sendSubviewToBack(sender)
         }) { (_) in
             sender.isUserInteractionEnabled = false
@@ -141,7 +139,6 @@ extension RootViewController: UICollectionViewDataSource {
     private func flipBackCardView(sender: CardCell) {
         UIView.transition(with: sender, duration: 0.5, options: .transitionFlipFromRight, animations: {
             sender.singleCardView.backgroundColor = UIColor(patternImage: UIImage(named: "card-back.jpg")!)
-            sender.titleLabel.alpha = 0
         }) { (_) in
             self.previousCardInfo = nil
         }
