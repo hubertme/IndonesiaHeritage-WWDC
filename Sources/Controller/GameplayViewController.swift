@@ -1,6 +1,5 @@
 import Foundation
 import UIKit
-import AVFoundation
 
 public class GameplayViewController : UIViewController, CardCellDelegate {
     
@@ -13,7 +12,6 @@ public class GameplayViewController : UIViewController, CardCellDelegate {
     var cardCollectionView: UICollectionView!
     var informationView: UIView!
     var headerLabel: UILabel!
-    var audioPlayer: AVAudioPlayer?
     
     // MARK: - Life cycle
     override public func loadView() {
@@ -27,7 +25,6 @@ public class GameplayViewController : UIViewController, CardCellDelegate {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        self.playMusic()
         self.addDummyData()
         self.setupElements()
         
@@ -65,18 +62,6 @@ public class GameplayViewController : UIViewController, CardCellDelegate {
         cardCollectionView.register(CardCell.self, forCellWithReuseIdentifier: CardCell.description())
         
         self.view.addSubview(cardCollectionView)
-    }
-    
-    private func playMusic() {
-        let musicUrl = URL(fileURLWithPath: Bundle.main.path(forResource: "Anjeun.mp3", ofType: nil)!)
-        
-        do {
-            audioPlayer = try AVAudioPlayer(contentsOf: musicUrl)
-            audioPlayer?.numberOfLoops = -1
-            audioPlayer?.play()
-        } catch {
-            print("Error in playing music \(error.localizedDescription)")
-        }
     }
 }
 
