@@ -102,6 +102,9 @@ extension RootViewController: UICollectionViewDataSource {
                 
                 if let previousCardInfo = self.previousCardInfo?.0,
                     let previousIndexPath = self.previousCardInfo?.1 {
+                    
+                    self.cardCollectionView.isUserInteractionEnabled = false
+                    
                     if currentCardInfo.title == previousCardInfo.title {
                         print("match!")
                         self.resizeAndStackCardView(sender: cardCell)
@@ -117,6 +120,9 @@ extension RootViewController: UICollectionViewDataSource {
                         
                         UIView.animate(withDuration: 0.5, animations: {
                             self.informationView.alpha = 1
+                        }, completion: { (_) in
+                            // FIXME:
+                            self.cardCollectionView.isUserInteractionEnabled = true
                         })
                         
                     } else {
@@ -125,6 +131,8 @@ extension RootViewController: UICollectionViewDataSource {
                         
                         self.cardInformationSet[previousIndexPath.item].isOpened = false
                         self.cardInformationSet[indexPath.item].isOpened = false
+                        
+                        self.cardCollectionView.isUserInteractionEnabled = true
                     }
                 } else {
                     self.previousCardInfo = (currentCardInfo, indexPath)
@@ -132,6 +140,7 @@ extension RootViewController: UICollectionViewDataSource {
             }
         } else {
             self.flipBackCardView(sender: cardCell)
+            self.cardInformationSet[indexPath.item].isOpened = false
         }
     }
     
@@ -141,10 +150,10 @@ extension RootViewController: UICollectionViewDataSource {
             sender.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
             sender.center = CGPoint(x: self.cardCollectionView.frame.maxX - sender.frame.width/2 - 20.0 - 10*self.cardsFinished, y: self.cardCollectionView.frame.minY + sender.frame.height/2 + 30.0)
             self.view.sendSubviewToBack(sender)
+            sender.alpha = 0
         }) { (_) in
             sender.isUserInteractionEnabled = false
             self.cardsFinished+=1
-//            self.view.sendSubviewToBack(sender.singleCardView)
             self.previousCardInfo = nil
         }
     }
@@ -154,6 +163,8 @@ extension RootViewController: UICollectionViewDataSource {
             sender.singleCardView.backgroundColor = UIColor(patternImage: UIImage(named: "card-back.jpg")!)
         }) { (_) in
             self.previousCardInfo = nil
+            // FIXME:
+//            self.cardCollectionView.isUserInteractionEnabled = true
         }
     }
 }
