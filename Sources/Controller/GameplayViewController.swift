@@ -161,6 +161,7 @@ extension GameplayViewController: UICollectionViewDataSource {
     private func setupPostGameplay() {
         let postGameplayView = PostGameplayView(frame: self.cardCollectionView.frame)
         postGameplayView.alpha = 0
+        postGameplayView.delegate = self
         self.cardCollectionView.removeFromSuperview()
         
         self.view.addSubview(postGameplayView)

@@ -9,6 +9,7 @@ public class PostGameplayView: UIView {
     
     // MARK: - Outlets
     var headerLabel: UILabel!
+    var subheaderLabel: UILabel!
     weak var delegate: PostGameplayViewDelegate?
     
     // MARK: - Lifecycle
@@ -27,12 +28,25 @@ public class PostGameplayView: UIView {
     // MARK: - Methods
     private func setupElements() {
         self.headerLabel = UILabel()
-        headerLabel.font = UIFont.systemFont(ofSize: 30, weight: .semibold)
-        headerLabel.textColor = .black
-        headerLabel.text = "Congratulations!"
-        headerLabel.sizeToFit()
-        headerLabel.center = self.center
+        self.headerLabel.font = UIFont.systemFont(ofSize: 30, weight: .semibold)
+        self.headerLabel.textColor = .black
+        self.headerLabel.numberOfLines = 2
+        self.headerLabel.textAlignment = .center
+        self.headerLabel.text = "Bhinekka Tunggal Ika"
+        self.headerLabel.sizeToFit()
+        self.headerLabel.center = self.center
         
-        self.addSubview(headerLabel)
+        self.addSubview(self.headerLabel)
+        
+        self.subheaderLabel = UILabel()
+        self.subheaderLabel.font = UIFont.systemFont(ofSize: 20, weight: .regular)
+        self.subheaderLabel.textColor = .darkGray
+        self.subheaderLabel.numberOfLines = 0
+        self.subheaderLabel.textAlignment = .center
+        self.subheaderLabel.text = "Unite in diversity\nWe are different but we are one\nThis is the spirit of Indonesian"
+        self.subheaderLabel.sizeToFit()
+        self.subheaderLabel.center = CGPoint(x: self.center.x, y: self.headerLabel.frame.maxY + self.subheaderLabel.frame.height/2 + 16)
+        
+        self.addSubview(self.subheaderLabel)
     }
 }
