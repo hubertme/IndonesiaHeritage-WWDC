@@ -1,12 +1,17 @@
 import Foundation
 import UIKit
 
+protocol InformationViewDelegate: class {
+    func handleCloseButtonTapped()
+}
+
 public class InformationView: UIView {
     
     // MARK: - Attributes
     var title: String = ""
     var information: String = ""
     var image: UIImage = UIImage()
+    weak var delegate: InformationViewDelegate?
     
     // MARK: - Outlets
     var titleLabel: UILabel!
@@ -51,6 +56,7 @@ public class InformationView: UIView {
         }) { (_) in
             // Animation completion handler
             // Delegate to remove subview from parent view
+            self.delegate?.handleCloseButtonTapped()
         }
     }
     

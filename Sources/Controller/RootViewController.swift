@@ -108,8 +108,11 @@ extension RootViewController: UICollectionViewDataSource {
                         self.resizeAndStackCardView(sender: self.cardCollectionView.cellForItem(at: previousIndexPath) as! CardCell)
                         
                         let informationViewImage = UIImage(named: "card-\((self.cardInformationSet[indexPath.item].title).lowercased()).jpg") ?? UIImage()
-                        self.informationView = InformationView(frame: self.view.frame, title: currentCardInfo.title, information: currentCardInfo.description, image: informationViewImage)
-                        self.informationView.alpha = 0
+                        let informationView = InformationView(frame: self.view.frame, title: currentCardInfo.title, information: currentCardInfo.description, image: informationViewImage)
+                        informationView.delegate = self
+                        informationView.alpha = 0
+                        
+                        self.informationView = informationView
                         self.view.addSubview(self.informationView)
                         
                         UIView.animate(withDuration: 0.5, animations: {
@@ -160,6 +163,9 @@ extension RootViewController: UICollectionViewDelegateFlowLayout {
 }
 
 // Delegate for information view
-extension RootViewController {
-    
+extension RootViewController: InformationViewDelegate {
+    func handleCloseButtonTapped() {
+        print("Close button tapped!")
+        self.informationView.removeFromSuperview()
+    }
 }
