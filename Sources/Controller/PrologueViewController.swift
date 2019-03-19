@@ -6,9 +6,12 @@ public class PrologueViewController: UIViewController {
     
     // MARK: - Attributes
     var audioPlayer: AVAudioPlayer?
+    let backgroundColor: UIColor = UIColor.white
     
     // MARK: - Outlets
     var navigateButton: UIButton!
+    var merdekaLabel: UILabel!
+    var merdekaProgressView: UIView!
     
     // MARK: - Life cycle
     public override func loadView() {
@@ -25,6 +28,15 @@ public class PrologueViewController: UIViewController {
         self.playMusic()
         self.setupElements()
         
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            UIView.animate(withDuration: 2, animations: {
+                self.merdekaProgressView.frame.size = CGSize(width: self.merdekaLabel.frame.width, height: self.merdekaProgressView.frame.height)
+                self.view.layoutIfNeeded()
+            }, completion: { (_) in
+                print("Animation ended")
+            })
+        }
+        
 //        self.view.addSubview(PostGameplayView(frame: self.view.frame))
     }
     
@@ -37,15 +49,32 @@ public class PrologueViewController: UIViewController {
         self.navigateButton.addTarget(self, action: #selector(handleNavigateButtonTapped), for: .touchUpInside)
         
         self.view.addSubview(self.navigateButton)
+        
+        // Merdeka label
+        self.merdekaLabel = UILabel()
+        self.merdekaLabel.textAlignment = .center
+        self.merdekaLabel.textColor = .clear
+        self.merdekaLabel.backgroundColor = self.backgroundColor
+        self.merdekaLabel.font = UIFont.systemFont(ofSize: 60, weight: .bold)
+        self.merdekaLabel.text = "MERDEKA"
+        self.merdekaLabel.sizeToFit()
+        self.merdekaLabel.frame = CGRect(x: self.view.center.x - self.merdekaLabel.frame.width/2, y: 100, width: self.merdekaLabel.frame.width, height: self.merdekaLabel.frame.height)
+        
+        self.view.addSubview(self.merdekaLabel)
+        
+        // Merdeka progress bar
+        self.merdekaProgressView = UIView(frame: self.merdekaLabel.frame)
+        self.merdekaProgressView.frame.size = CGSize(width: 0, height: self.merdekaProgressView.frame.height)
+        self.merdekaProgressView.backgroundColor = .red
+        self.merdekaLabel.sendSubviewToBack(merdekaProgressView)
+        print(self.merdekaProgressView.frame, self.merdekaLabel.frame)
+//        self.merdekaProgressView.sendSubviewToBack(self.merdekaLabel)
     }
     
     @objc private func handleNavigateButtonTapped() {
         let gameplayVC = GameplayViewController()
         self.present(gameplayVC, animated: true, completion: nil)
-//        UIView.transition(from: self.view, to: gameplayVC.view, duration: 1, options: .transitionFlipFromLeft) { (_) in
-//            self.navigationController?.viewControllers.remove(at: 0)
-//            print(self.navigationController?.viewControllers)
-//        }
+        
     }
     
     private func playMusic() {
