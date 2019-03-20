@@ -34,6 +34,25 @@ public class GameplayViewController : UIViewController, CardCellDelegate {
         }
     }
     
+    public override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.cardCollectionView.isUserInteractionEnabled = false
+        
+        for idx in 0..<self.cardInformationSet.count {
+            let currentCell = self.cardCollectionView.cellForItem(at: IndexPath(row: idx, section: 0)) as! CardCell
+            UIView.transition(with: currentCell, duration: 0.5, options: .transitionFlipFromLeft, animations: {
+                currentCell.singleCardView.backgroundColor = UIColor(patternImage: UIImage(named: "card-\((self.cardInformationSet[idx].title).lowercased()).jpg") ?? UIImage())
+            }) { (_) in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    self.flipBackCardView(sender: self.cardCollectionView.cellForItem(at: IndexPath(row: idx, section: 0)) as! CardCell)
+                    self.cardInformationSet[idx].isOpened = false
+                }
+            }
+        }
+        
+        self.cardCollectionView.isUserInteractionEnabled = true
+    }
+    
     // MARK: - Methods
     private func setupElements() {
         
