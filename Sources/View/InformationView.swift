@@ -75,7 +75,7 @@ public class InformationView: UIView {
     
     private func setupElements() {
         // Title label
-        self.titleLabel = UILabel(frame: CGRect(x: 16, y: self.closeButton.frame.maxY + 16, width: self.frame.width - 32, height: 50))
+        self.titleLabel = UILabel(frame: CGRect(x: 16, y: self.closeButton.frame.maxY + 8, width: self.frame.width - 32, height: 30))
         self.titleLabel.textColor = .white
         self.titleLabel.font = UIFont.systemFont(ofSize: 30, weight: .bold)
         self.titleLabel.textAlignment = .center
