@@ -37,6 +37,7 @@ public class PrologueViewController: UIViewController {
                 self.view.layoutIfNeeded()
             }, completion: { (_) in
                 print("Animation ended")
+                sleep(1)
                 self.handleNavigateButtonTapped()
             })
         }
