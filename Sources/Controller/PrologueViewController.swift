@@ -46,40 +46,12 @@ public class PrologueViewController: UIViewController {
     
     // MARK: - Methods
     private func setupElements() {
-        self.navigateButton = UIButton(type: .system)
-        self.navigateButton.frame.size = CGSize(width: 70, height: 50)
-        self.navigateButton.center = self.view.center
-        self.navigateButton.setTitle("Navigate", for: .normal)
-        self.navigateButton.addTarget(self, action: #selector(handleNavigateButtonTapped), for: .touchUpInside)
-        
-        self.view.addSubview(self.navigateButton)
-        
-        // Merdeka label
-        self.merdekaLabel = UILabel()
-        self.merdekaLabel.textAlignment = .center
-        self.merdekaLabel.textColor = .white
-//        self.merdekaLabel.backgroundColor = self.backgroundColor
-        self.merdekaLabel.font = UIFont.systemFont(ofSize: 70, weight: .heavy)
-        self.merdekaLabel.text = "MERDEKA!"
-        self.merdekaLabel.sizeToFit()
-        self.merdekaLabel.frame = CGRect(x: self.view.center.x - self.merdekaLabel.frame.width/2, y: 100, width: self.merdekaLabel.frame.width, height: self.merdekaLabel.frame.height)
-        
-        self.view.addSubview(self.merdekaLabel)
-        
-        // Merdeka progress bar
-        self.merdekaProgressView = UIView(frame: CGRect(x: self.merdekaLabel.frame.minX-16, y: self.merdekaLabel.frame.minY-4, width: 0, height: self.merdekaLabel.frame.height+8))
-        self.merdekaProgressView.backgroundColor = .red
-        
-        self.view.insertSubview(self.merdekaProgressView, belowSubview: self.merdekaLabel)
         
         // Cover image view
-        let coverImageHeight: CGFloat = 300
         self.coverImageView = UIImageView(image: UIImage(named: "indonesia.jpg") ?? UIImage())
         self.coverImageView.contentMode = .scaleAspectFill
-        self.coverImageView.frame.size = CGSize(width: 1.5*coverImageHeight, height: coverImageHeight)
-        self.coverImageView.center = CGPoint(x: self.view.center.x, y: self.merdekaLabel.frame.maxY + coverImageHeight/2 + 32)
+        self.coverImageView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 0.75*self.view.frame.width)
         self.coverImageView.clipsToBounds = true
-        print(self.coverImageView.image, self.coverImageView.frame)
         self.view.addSubview(self.coverImageView)
         
         // Welcome Indonesian label
@@ -105,6 +77,24 @@ public class PrologueViewController: UIViewController {
         self.welcomeEnglishLabel.frame = CGRect(x: self.view.center.x - self.welcomeEnglishLabel.frame.width/2, y: self.welcomeIndonesianLabel.frame.maxY+8, width: self.welcomeEnglishLabel.frame.width, height: self.welcomeEnglishLabel.frame.height)
         
         self.view.addSubview(self.welcomeEnglishLabel)
+        
+        // Merdeka label
+        self.merdekaLabel = UILabel()
+        self.merdekaLabel.textAlignment = .center
+        self.merdekaLabel.textColor = .white
+        //        self.merdekaLabel.backgroundColor = self.backgroundColor
+        self.merdekaLabel.font = UIFont.systemFont(ofSize: 70, weight: .heavy)
+        self.merdekaLabel.text = "MERDEKA!"
+        self.merdekaLabel.sizeToFit()
+        self.merdekaLabel.frame = CGRect(x: self.view.center.x - self.merdekaLabel.frame.width/2, y: self.welcomeEnglishLabel.frame.maxY + 32, width: self.merdekaLabel.frame.width, height: self.merdekaLabel.frame.height)
+        
+        self.view.addSubview(self.merdekaLabel)
+        
+        // Merdeka progress bar
+        self.merdekaProgressView = UIView(frame: CGRect(x: self.merdekaLabel.frame.minX-16, y: self.merdekaLabel.frame.minY-4, width: 0, height: self.merdekaLabel.frame.height+8))
+        self.merdekaProgressView.backgroundColor = .red
+        
+        self.view.insertSubview(self.merdekaProgressView, belowSubview: self.merdekaLabel)
     }
     
     @objc private func handleNavigateButtonTapped() {
