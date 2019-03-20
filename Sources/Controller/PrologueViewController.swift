@@ -92,7 +92,7 @@ public class PrologueViewController: UIViewController {
         self.merdekaLabel.textAlignment = .center
         self.merdekaLabel.textColor = .white
         //        self.merdekaLabel.backgroundColor = self.backgroundColor
-        self.merdekaLabel.font = UIFont.systemFont(ofSize: 70, weight: .heavy)
+        self.merdekaLabel.font = UIFont.systemFont(ofSize: 60, weight: .heavy)
         self.merdekaLabel.text = "MERDEKA!"
         self.merdekaLabel.sizeToFit()
         self.merdekaLabel.frame = CGRect(x: self.view.center.x - self.merdekaLabel.frame.width/2, y: self.welcomeEnglishLabel.frame.maxY + 32, width: self.merdekaLabel.frame.width, height: self.merdekaLabel.frame.height)
@@ -100,7 +100,7 @@ public class PrologueViewController: UIViewController {
         self.view.addSubview(self.merdekaLabel)
         
         // Merdeka progress bar
-        self.merdekaProgressView = UIView(frame: CGRect(x: self.merdekaLabel.frame.minX-16, y: self.merdekaLabel.frame.minY-4, width: 0, height: self.merdekaLabel.frame.height+8))
+        self.merdekaProgressView = UIView(frame: CGRect(x: self.merdekaLabel.frame.minX-16, y: self.merdekaLabel.frame.minY-8, width: 0, height: self.merdekaLabel.frame.height+16))
         self.merdekaProgressView.backgroundColor = .red
         
         self.view.insertSubview(self.merdekaProgressView, belowSubview: self.merdekaLabel)

@@ -22,14 +22,16 @@ public class PostGameplayView: UIView {
         self.setupElements()
         self.delegate?.setupWinningAnimation()
         
-        DispatchQueue.main.asyncAfter(deadline: .now()+3) {
+        DispatchQueue.main.asyncAfter(deadline: .now()+1.5) {
             UIView.animate(withDuration: 1.5, animations: {
                 self.headerLabel.alpha = 1
                 self.subheaderLabel.alpha = 1
             }, completion: { (_) in
-                UIView.animate(withDuration: 1.5, animations: {
+                UIView.animate(withDuration: 1.5, delay: 1, options: .curveLinear, animations: {
                     self.thankYouEnglishLabel.alpha = 1
                     self.thankYouIndonesianLabel.alpha = 1
+                }, completion: { (_) in
+                    // Completion handler
                 })
             })
         }
@@ -42,23 +44,23 @@ public class PostGameplayView: UIView {
     // MARK: - Methods
     private func setupElements() {
         self.headerLabel = UILabel()
-        self.headerLabel.font = UIFont.systemFont(ofSize: 30, weight: .semibold)
+        self.headerLabel.font = UIFont.systemFont(ofSize: 45, weight: .bold)
         self.headerLabel.textColor = .black
         self.headerLabel.numberOfLines = 2
         self.headerLabel.textAlignment = .center
         self.headerLabel.text = "Bhinekka Tunggal Ika"
         self.headerLabel.sizeToFit()
-        self.headerLabel.frame = CGRect(x: self.center.x - self.headerLabel.frame.width/2, y: 130, width: self.headerLabel.frame.width, height: self.headerLabel.frame.height)
+        self.headerLabel.frame = CGRect(x: self.center.x - self.headerLabel.frame.width/2, y: 100, width: self.headerLabel.frame.width, height: self.headerLabel.frame.height)
         self.headerLabel.alpha = 0
         
         self.addSubview(self.headerLabel)
         
         self.subheaderLabel = UILabel()
-        self.subheaderLabel.font = UIFont.systemFont(ofSize: 20, weight: .regular)
+        self.subheaderLabel.font = UIFont.systemFont(ofSize: 24, weight: .regular)
         self.subheaderLabel.textColor = .darkGray
         self.subheaderLabel.numberOfLines = 0
         self.subheaderLabel.textAlignment = .center
-        self.subheaderLabel.text = "Unite in diversity\nWe are different but we are one\nThis is the spirit of Indonesian"
+        self.subheaderLabel.text = "Unite in diversity\n\n\"We are different but we are one\"\nThis is the spirit of Indonesia\nthe world acknowledge"
         self.subheaderLabel.sizeToFit()
         self.subheaderLabel.frame = CGRect(x: self.center.x - self.subheaderLabel.frame.width/2, y: self.headerLabel.frame.maxY + 32, width: self.subheaderLabel.frame.width, height: self.subheaderLabel.frame.height)
         self.subheaderLabel.alpha = 0
@@ -66,20 +68,20 @@ public class PostGameplayView: UIView {
         self.addSubview(self.subheaderLabel)
         
         self.thankYouIndonesianLabel = UILabel()
-        self.thankYouIndonesianLabel.font = UIFont.systemFont(ofSize: 30, weight: .semibold)
+        self.thankYouIndonesianLabel.font = UIFont.systemFont(ofSize: 40, weight: .semibold)
         self.thankYouIndonesianLabel.textColor = .black
         self.thankYouIndonesianLabel.numberOfLines = 0
         self.thankYouIndonesianLabel.textAlignment = .center
-        self.thankYouIndonesianLabel.text = "Terima kasih atas ulasan Anda!"
+        self.thankYouIndonesianLabel.text = "Terima kasih!"
         self.thankYouIndonesianLabel.sizeToFit()
         print(self.thankYouIndonesianLabel.frame)
-        self.thankYouIndonesianLabel.frame = CGRect(x: self.center.x - self.thankYouIndonesianLabel.frame.width/2, y: self.subheaderLabel.frame.maxY + 64, width: self.thankYouIndonesianLabel.frame.width, height: self.thankYouIndonesianLabel.frame.height)
+        self.thankYouIndonesianLabel.frame = CGRect(x: self.center.x - self.thankYouIndonesianLabel.frame.width/2, y: self.subheaderLabel.frame.maxY + 100, width: self.thankYouIndonesianLabel.frame.width, height: self.thankYouIndonesianLabel.frame.height)
         self.thankYouIndonesianLabel.alpha = 0
         
         self.addSubview(self.thankYouIndonesianLabel)
         
         self.thankYouEnglishLabel = UILabel()
-        self.thankYouEnglishLabel.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+        self.thankYouEnglishLabel.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
         self.thankYouEnglishLabel.textColor = .gray
         self.thankYouEnglishLabel.numberOfLines = 0
         self.thankYouEnglishLabel.textAlignment = .center
