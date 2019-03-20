@@ -53,9 +53,9 @@ public class PrologueViewController: UIViewController {
         // Merdeka label
         self.merdekaLabel = UILabel()
         self.merdekaLabel.textAlignment = .center
-        self.merdekaLabel.textColor = .clear
-        self.merdekaLabel.backgroundColor = self.backgroundColor
-        self.merdekaLabel.font = UIFont.systemFont(ofSize: 60, weight: .bold)
+        self.merdekaLabel.textColor = .black
+//        self.merdekaLabel.backgroundColor = self.backgroundColor
+        self.merdekaLabel.font = UIFont.systemFont(ofSize: 70, weight: .heavy)
         self.merdekaLabel.text = "MERDEKA"
         self.merdekaLabel.sizeToFit()
         self.merdekaLabel.frame = CGRect(x: self.view.center.x - self.merdekaLabel.frame.width/2, y: 100, width: self.merdekaLabel.frame.width, height: self.merdekaLabel.frame.height)
@@ -66,8 +66,9 @@ public class PrologueViewController: UIViewController {
         self.merdekaProgressView = UIView(frame: self.merdekaLabel.frame)
         self.merdekaProgressView.frame.size = CGSize(width: 0, height: self.merdekaProgressView.frame.height)
         self.merdekaProgressView.backgroundColor = .red
-        self.merdekaLabel.sendSubviewToBack(merdekaProgressView)
-        print(self.merdekaProgressView.frame, self.merdekaLabel.frame)
+        self.view.insertSubview(self.merdekaProgressView, belowSubview: self.merdekaLabel)
+//        self.merdekaLabel.sendSubviewToBack(merdekaProgressView)
+//        self.view.bringSubviewToFront(self.merdekaLabel)
 //        self.merdekaProgressView.sendSubviewToBack(self.merdekaLabel)
     }
     
