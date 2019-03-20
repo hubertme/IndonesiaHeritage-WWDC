@@ -12,6 +12,8 @@ public class PrologueViewController: UIViewController {
     var navigateButton: UIButton!
     var merdekaLabel: UILabel!
     var merdekaProgressView: UIView!
+    var welcomeIndonesianLabel: UILabel!
+    var welcomeEnglishLabel: UILabel!
     
     // MARK: - Life cycle
     public override func loadView() {
@@ -65,10 +67,32 @@ public class PrologueViewController: UIViewController {
         // Merdeka progress bar
         self.merdekaProgressView = UIView(frame: CGRect(x: self.merdekaLabel.frame.minX-16, y: self.merdekaLabel.frame.minY-4, width: 0, height: self.merdekaLabel.frame.height+8))
         self.merdekaProgressView.backgroundColor = .red
+        
         self.view.insertSubview(self.merdekaProgressView, belowSubview: self.merdekaLabel)
-//        self.merdekaLabel.sendSubviewToBack(merdekaProgressView)
-//        self.view.bringSubviewToFront(self.merdekaLabel)
-//        self.merdekaProgressView.sendSubviewToBack(self.merdekaLabel)
+        
+        // Welcome Indonesian label
+        self.welcomeIndonesianLabel = UILabel()
+        self.welcomeIndonesianLabel.textAlignment = .center
+        self.welcomeIndonesianLabel.textColor = .black
+        self.welcomeIndonesianLabel.numberOfLines = 0
+        self.welcomeIndonesianLabel.font = UIFont.systemFont(ofSize: 40, weight: .bold)
+        self.welcomeIndonesianLabel.text = "Selamat datang"
+        self.welcomeIndonesianLabel.sizeToFit()
+        self.welcomeIndonesianLabel.frame = CGRect(x: self.view.center.x - self.welcomeIndonesianLabel.frame.width/2, y: self.merdekaProgressView.frame.maxY+64, width: self.welcomeIndonesianLabel.frame.width, height: self.welcomeIndonesianLabel.frame.height)
+        
+        self.view.addSubview(self.welcomeIndonesianLabel)
+        
+        // Welcome English label
+        self.welcomeEnglishLabel = UILabel()
+        self.welcomeEnglishLabel.textAlignment = .center
+        self.welcomeEnglishLabel.textColor = .gray
+        self.welcomeEnglishLabel.numberOfLines = 0
+        self.welcomeEnglishLabel.font = UIFont.systemFont(ofSize: 28, weight: .light)
+        self.welcomeEnglishLabel.text = "Welcome onboard\nPlease enjoy a glimpse of Indonesia"
+        self.welcomeEnglishLabel.sizeToFit()
+        self.welcomeEnglishLabel.frame = CGRect(x: self.view.center.x - self.welcomeEnglishLabel.frame.width/2, y: self.welcomeIndonesianLabel.frame.maxY+8, width: self.welcomeEnglishLabel.frame.width, height: self.welcomeEnglishLabel.frame.height)
+        
+        self.view.addSubview(self.welcomeEnglishLabel)
     }
     
     @objc private func handleNavigateButtonTapped() {
