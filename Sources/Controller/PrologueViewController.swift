@@ -30,7 +30,7 @@ public class PrologueViewController: UIViewController {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             UIView.animate(withDuration: 2, animations: {
-                self.merdekaProgressView.frame.size = CGSize(width: self.merdekaLabel.frame.width, height: self.merdekaProgressView.frame.height)
+                self.merdekaProgressView.frame.size = CGSize(width: self.merdekaLabel.frame.width+32, height: self.merdekaProgressView.frame.height)
                 self.view.layoutIfNeeded()
             }, completion: { (_) in
                 print("Animation ended")
@@ -53,18 +53,17 @@ public class PrologueViewController: UIViewController {
         // Merdeka label
         self.merdekaLabel = UILabel()
         self.merdekaLabel.textAlignment = .center
-        self.merdekaLabel.textColor = .black
+        self.merdekaLabel.textColor = .white
 //        self.merdekaLabel.backgroundColor = self.backgroundColor
         self.merdekaLabel.font = UIFont.systemFont(ofSize: 70, weight: .heavy)
-        self.merdekaLabel.text = "MERDEKA"
+        self.merdekaLabel.text = "MERDEKA!"
         self.merdekaLabel.sizeToFit()
         self.merdekaLabel.frame = CGRect(x: self.view.center.x - self.merdekaLabel.frame.width/2, y: 100, width: self.merdekaLabel.frame.width, height: self.merdekaLabel.frame.height)
         
         self.view.addSubview(self.merdekaLabel)
         
         // Merdeka progress bar
-        self.merdekaProgressView = UIView(frame: self.merdekaLabel.frame)
-        self.merdekaProgressView.frame.size = CGSize(width: 0, height: self.merdekaProgressView.frame.height)
+        self.merdekaProgressView = UIView(frame: CGRect(x: self.merdekaLabel.frame.minX-16, y: self.merdekaLabel.frame.minY-4, width: 0, height: self.merdekaLabel.frame.height+8))
         self.merdekaProgressView.backgroundColor = .red
         self.view.insertSubview(self.merdekaProgressView, belowSubview: self.merdekaLabel)
 //        self.merdekaLabel.sendSubviewToBack(merdekaProgressView)
