@@ -31,14 +31,20 @@ public class PrologueViewController: UIViewController {
         self.playMusic()
         self.setupElements()
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            UIView.animate(withDuration: 2, animations: {
-                self.merdekaProgressView.frame.size = CGSize(width: self.merdekaLabel.frame.width+32, height: self.merdekaProgressView.frame.height)
-                self.view.layoutIfNeeded()
+        UIView.animate(withDuration: 1, animations: {
+            self.welcomeIndonesianLabel.alpha = 1
+        }) { (_) in
+            UIView.animate(withDuration: 1, delay: 1, options: .curveLinear, animations: {
+                self.welcomeEnglishLabel.alpha = 1
             }, completion: { (_) in
-                print("Animation ended")
-                sleep(1)
-                self.handleNavigateButtonTapped()
+                UIView.animate(withDuration: 2, delay: 1, options: .curveLinear, animations: {
+                    self.merdekaProgressView.frame.size = CGSize(width: self.merdekaLabel.frame.width+32, height: self.merdekaProgressView.frame.height)
+                    self.view.layoutIfNeeded()
+                }, completion: { (_) in
+                    print("Animation ended")
+                    sleep(1)
+                    self.handleNavigateButtonTapped()
+                })
             })
         }
         
@@ -64,6 +70,7 @@ public class PrologueViewController: UIViewController {
         self.welcomeIndonesianLabel.text = "Selamat datang"
         self.welcomeIndonesianLabel.sizeToFit()
         self.welcomeIndonesianLabel.frame = CGRect(x: self.view.center.x - self.welcomeIndonesianLabel.frame.width/2, y: self.coverImageView.frame.maxY+32, width: self.welcomeIndonesianLabel.frame.width, height: self.welcomeIndonesianLabel.frame.height)
+        self.welcomeIndonesianLabel.alpha = 0
         
         self.view.addSubview(self.welcomeIndonesianLabel)
         
@@ -76,6 +83,7 @@ public class PrologueViewController: UIViewController {
         self.welcomeEnglishLabel.text = "Welcome onboard\nPlease enjoy a glimpse of Indonesia"
         self.welcomeEnglishLabel.sizeToFit()
         self.welcomeEnglishLabel.frame = CGRect(x: self.view.center.x - self.welcomeEnglishLabel.frame.width/2, y: self.welcomeIndonesianLabel.frame.maxY+8, width: self.welcomeEnglishLabel.frame.width, height: self.welcomeEnglishLabel.frame.height)
+        self.welcomeEnglishLabel.alpha = 0
         
         self.view.addSubview(self.welcomeEnglishLabel)
         
