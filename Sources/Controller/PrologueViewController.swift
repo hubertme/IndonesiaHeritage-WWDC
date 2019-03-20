@@ -37,7 +37,7 @@ public class PrologueViewController: UIViewController {
             UIView.animate(withDuration: 1, delay: 1, options: .curveLinear, animations: {
                 self.welcomeEnglishLabel.alpha = 1
             }, completion: { (_) in
-                UIView.animate(withDuration: 2, delay: 1, options: .curveLinear, animations: {
+                UIView.animate(withDuration: 2, delay: 1, options: .curveEaseIn, animations: {
                     self.merdekaProgressView.frame.size = CGSize(width: self.merdekaLabel.frame.width+32, height: self.merdekaProgressView.frame.height)
                     self.view.layoutIfNeeded()
                 }, completion: { (_) in

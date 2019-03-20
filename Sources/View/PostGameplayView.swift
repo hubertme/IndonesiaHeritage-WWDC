@@ -18,11 +18,11 @@ public class PostGameplayView: UIView {
     public override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.backgroundColor = #colorLiteral(red: 0.9631918073, green: 0.9041539431, blue: 0.337795198, alpha: 0.2451840753)
+//        self.backgroundColor = #colorLiteral(red: 0.9631918073, green: 0.9041539431, blue: 0.337795198, alpha: 0.2451840753)
         self.setupElements()
         self.delegate?.setupWinningAnimation()
         
-        DispatchQueue.main.asyncAfter(deadline: .now()+1.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now()+0.5) {
             UIView.animate(withDuration: 1.5, animations: {
                 self.headerLabel.alpha = 1
                 self.subheaderLabel.alpha = 1
