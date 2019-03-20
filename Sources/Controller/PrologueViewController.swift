@@ -14,6 +14,7 @@ public class PrologueViewController: UIViewController {
     var merdekaProgressView: UIView!
     var welcomeIndonesianLabel: UILabel!
     var welcomeEnglishLabel: UILabel!
+    var coverImageView: UIImageView!
     
     // MARK: - Life cycle
     public override func loadView() {
@@ -70,6 +71,16 @@ public class PrologueViewController: UIViewController {
         
         self.view.insertSubview(self.merdekaProgressView, belowSubview: self.merdekaLabel)
         
+        // Cover image view
+        let coverImageHeight: CGFloat = 300
+        self.coverImageView = UIImageView(image: UIImage(named: "indonesia.jpg") ?? UIImage())
+        self.coverImageView.contentMode = .scaleAspectFill
+        self.coverImageView.frame.size = CGSize(width: 1.5*coverImageHeight, height: coverImageHeight)
+        self.coverImageView.center = CGPoint(x: self.view.center.x, y: self.merdekaLabel.frame.maxY + coverImageHeight/2 + 32)
+        self.coverImageView.clipsToBounds = true
+        print(self.coverImageView.image, self.coverImageView.frame)
+        self.view.addSubview(self.coverImageView)
+        
         // Welcome Indonesian label
         self.welcomeIndonesianLabel = UILabel()
         self.welcomeIndonesianLabel.textAlignment = .center
@@ -78,7 +89,7 @@ public class PrologueViewController: UIViewController {
         self.welcomeIndonesianLabel.font = UIFont.systemFont(ofSize: 40, weight: .bold)
         self.welcomeIndonesianLabel.text = "Selamat datang"
         self.welcomeIndonesianLabel.sizeToFit()
-        self.welcomeIndonesianLabel.frame = CGRect(x: self.view.center.x - self.welcomeIndonesianLabel.frame.width/2, y: self.merdekaProgressView.frame.maxY+64, width: self.welcomeIndonesianLabel.frame.width, height: self.welcomeIndonesianLabel.frame.height)
+        self.welcomeIndonesianLabel.frame = CGRect(x: self.view.center.x - self.welcomeIndonesianLabel.frame.width/2, y: self.coverImageView.frame.maxY+32, width: self.welcomeIndonesianLabel.frame.width, height: self.welcomeIndonesianLabel.frame.height)
         
         self.view.addSubview(self.welcomeIndonesianLabel)
         
