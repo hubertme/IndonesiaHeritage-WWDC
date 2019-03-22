@@ -123,7 +123,7 @@ extension GameplayViewController: UICollectionViewDataSource {
                         self.cardsFinished+=1
                         
                         let informationViewImage = UIImage(named: "info-\((self.cardInformationSet[indexPath.item].title).lowercased()).jpg") ?? UIImage()
-                        let informationView = InformationView(frame: self.view.frame, title: currentCardInfo.title, information: currentCardInfo.description, image: informationViewImage)
+                        let informationView = InformationView(frame: self.view.frame, title: currentCardInfo.title, information: currentCardInfo.description, image: informationViewImage, source: currentCardInfo.imageSource)
                         informationView.delegate = self
                         informationView.alpha = 0
                         
@@ -182,10 +182,8 @@ extension GameplayViewController: UICollectionViewDataSource {
         let postGameplayView = PostGameplayView(frame: self.cardCollectionView.frame)
         postGameplayView.alpha = 0
         postGameplayView.delegate = self
-        print(postGameplayView.delegate)
         
         self.postGameplayView = postGameplayView
-        print(postGameplayView.delegate)
         self.cardCollectionView.removeFromSuperview()
         
         self.view.addSubview(self.postGameplayView)

@@ -40,12 +40,13 @@ public class InformationView: UIView {
         fatalError("Init has not been implemented!")
     }
     
-    convenience init(frame: CGRect, title: String, information: String, image: UIImage) {
+    convenience init(frame: CGRect, title: String, information: String, image: UIImage, source: String) {
         self.init(frame: frame)
         
         self.title = title
         self.information = information
         self.image = image
+        self.imageSource = source
         
         self.setupElements()
         UIView.animateKeyframes(withDuration: 4, delay: 0, options: .calculationModeLinear, animations: {

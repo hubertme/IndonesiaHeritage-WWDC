@@ -69,7 +69,7 @@ public class PrologueViewController: UIViewController {
         self.imageSourceLabel.numberOfLines = 1
         self.imageSourceLabel.font = UIFont.systemFont(ofSize: 12, weight: .light)
         self.imageSourceLabel.textColor = .gray
-        self.imageSourceLabel.text = "Image by Ahmad Syahrir, Pexels.com"
+        self.imageSourceLabel.text = "Image by Ahmad Syahrir, Pexels"
         self.imageSourceLabel.sizeToFit()
         self.imageSourceLabel.frame.origin = CGPoint(x: self.coverImageView.frame.maxX - self.imageSourceLabel.frame.width - 4, y: self.coverImageView.frame.maxY+4)
         
