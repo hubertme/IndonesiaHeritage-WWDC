@@ -10,6 +10,7 @@ public class InformationView: UIView {
     // MARK: - Attributes
     var title: String = ""
     var information: String = ""
+    var imageSource: String = ""
     var image: UIImage = UIImage()
     weak var delegate: InformationViewDelegate?
     
@@ -18,6 +19,7 @@ public class InformationView: UIView {
     var informationLabel: UILabel!
     var imageView: UIImageView!
     var closeButton: UIButton!
+    var imageSourceLabel: UILabel!
     
     // MARK: - Life cycle
     public override init(frame: CGRect) {
@@ -97,8 +99,20 @@ public class InformationView: UIView {
         
         self.addSubview(self.imageView)
         
+        // Credit label
+        self.imageSourceLabel = UILabel()
+        self.imageSourceLabel.textAlignment = .center
+        self.imageSourceLabel.numberOfLines = 1
+        self.imageSourceLabel.font = UIFont.systemFont(ofSize: 12, weight: .light)
+        self.imageSourceLabel.textColor = .lightGray
+        self.imageSourceLabel.text = "Image by: \(self.imageSource)"
+        self.imageSourceLabel.sizeToFit()
+        self.imageSourceLabel.center = CGPoint(x: self.center.x, y: self.imageView.frame.maxY + self.imageSourceLabel.frame.height/2 + 4)
+        
+        self.addSubview(self.imageSourceLabel)
+        
         // Information label
-        self.informationLabel = UILabel(frame: CGRect(x: 16, y: self.imageView.frame.maxY + 16, width: self.frame.width - 32, height: 0))
+        self.informationLabel = UILabel(frame: CGRect(x: 16, y: self.imageSourceLabel.frame.maxY + 16, width: self.frame.width - 32, height: 0))
         self.informationLabel.textColor = .white
         self.informationLabel.font = UIFont.systemFont(ofSize: 18, weight: .light)
         self.informationLabel.textAlignment = .center
