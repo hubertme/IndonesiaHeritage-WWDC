@@ -14,6 +14,7 @@ public class PrologueViewController: UIViewController {
     var merdekaProgressView: UIView!
     var welcomeIndonesianLabel: UILabel!
     var welcomeEnglishLabel: UILabel!
+    var imageSourceLabel: UILabel!
     var coverImageView: UIImageView!
     
     // MARK: - Life cycle
@@ -59,7 +60,20 @@ public class PrologueViewController: UIViewController {
         self.coverImageView.contentMode = .scaleAspectFill
         self.coverImageView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 0.75*self.view.frame.width)
         self.coverImageView.clipsToBounds = true
+        
         self.view.addSubview(self.coverImageView)
+        
+        // Credit label
+        self.imageSourceLabel = UILabel()
+        self.imageSourceLabel.textAlignment = .right
+        self.imageSourceLabel.numberOfLines = 1
+        self.imageSourceLabel.font = UIFont.systemFont(ofSize: 12, weight: .light)
+        self.imageSourceLabel.textColor = .gray
+        self.imageSourceLabel.text = "Image by Ahmad Syahrir, Pexels.com"
+        self.imageSourceLabel.sizeToFit()
+        self.imageSourceLabel.frame.origin = CGPoint(x: self.coverImageView.frame.maxX - self.imageSourceLabel.frame.width - 4, y: self.coverImageView.frame.maxY+4)
+        
+        self.view.addSubview(self.imageSourceLabel)
         
         // Welcome Indonesian label
         self.welcomeIndonesianLabel = UILabel()
@@ -69,7 +83,7 @@ public class PrologueViewController: UIViewController {
         self.welcomeIndonesianLabel.font = UIFont.systemFont(ofSize: 40, weight: .bold)
         self.welcomeIndonesianLabel.text = "Selamat datang"
         self.welcomeIndonesianLabel.sizeToFit()
-        self.welcomeIndonesianLabel.frame = CGRect(x: self.view.center.x - self.welcomeIndonesianLabel.frame.width/2, y: self.coverImageView.frame.maxY+32, width: self.welcomeIndonesianLabel.frame.width, height: self.welcomeIndonesianLabel.frame.height)
+        self.welcomeIndonesianLabel.frame = CGRect(x: self.view.center.x - self.welcomeIndonesianLabel.frame.width/2, y: self.imageSourceLabel.frame.maxY+24, width: self.welcomeIndonesianLabel.frame.width, height: self.welcomeIndonesianLabel.frame.height)
         self.welcomeIndonesianLabel.alpha = 0
         
         self.view.addSubview(self.welcomeIndonesianLabel)
