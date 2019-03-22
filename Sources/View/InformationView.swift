@@ -54,6 +54,7 @@ public class InformationView: UIView {
             })
             UIView.addKeyframe(withRelativeStartTime: 0.15, relativeDuration: 0.15, animations: {
                 self.imageView.alpha = 1
+                self.imageSourceLabel.alpha = 1
             })
             UIView.addKeyframe(withRelativeStartTime: 0.3, relativeDuration: 0.15, animations: {
                 self.informationLabel.alpha = 1
@@ -108,6 +109,7 @@ public class InformationView: UIView {
         self.imageSourceLabel.text = "Image by: \(self.imageSource)"
         self.imageSourceLabel.sizeToFit()
         self.imageSourceLabel.center = CGPoint(x: self.center.x, y: self.imageView.frame.maxY + self.imageSourceLabel.frame.height/2 + 4)
+        self.imageSourceLabel.alpha = 0
         
         self.addSubview(self.imageSourceLabel)
         
