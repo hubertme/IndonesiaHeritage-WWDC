@@ -44,11 +44,11 @@ public class PostGameplayView: UIView {
     // MARK: - Methods
     private func setupElements() {
         self.headerLabel = UILabel()
-        self.headerLabel.font = UIFont.systemFont(ofSize: 45, weight: .bold)
+        self.headerLabel.font = UIFont.systemFont(ofSize: 40, weight: .bold)
         self.headerLabel.textColor = .black
         self.headerLabel.numberOfLines = 2
         self.headerLabel.textAlignment = .center
-        self.headerLabel.text = "Bhinekka Tunggal Ika"
+        self.headerLabel.text = "Connected in Distance"
         self.headerLabel.sizeToFit()
         self.headerLabel.frame = CGRect(x: self.center.x - self.headerLabel.frame.width/2, y: 100, width: self.headerLabel.frame.width, height: self.headerLabel.frame.height)
         self.headerLabel.alpha = 0
@@ -60,7 +60,7 @@ public class PostGameplayView: UIView {
         self.subheaderLabel.textColor = .darkGray
         self.subheaderLabel.numberOfLines = 0
         self.subheaderLabel.textAlignment = .center
-        self.subheaderLabel.text = "Unite in diversity\n\n\"We are different but we are one\"\nThis is the spirit of Indonesia\nthe world acknowledge"
+        self.subheaderLabel.text = "Spreaded across Indonesia,\nyet connected and remembered always.\nJust like the cards.\n\nThis is the spirit of Indonesia that\nThe World acknowledge..."
         self.subheaderLabel.sizeToFit()
         self.subheaderLabel.frame = CGRect(x: self.center.x - self.subheaderLabel.frame.width/2, y: self.headerLabel.frame.maxY + 32, width: self.subheaderLabel.frame.width, height: self.subheaderLabel.frame.height)
         self.subheaderLabel.alpha = 0
