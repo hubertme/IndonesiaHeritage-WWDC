@@ -197,7 +197,6 @@ extension GameplayViewController: InformationViewDelegate {
     
     private func setupPostGameplay() {
         let heritageView = HeritageView(frame: self.cardCollectionView.frame)
-        heritageView.delegate = self
         
         self.heritageView = heritageView
         self.heritageView.alpha = 0
@@ -215,20 +214,20 @@ extension GameplayViewController: InformationViewDelegate {
 }
 
 // Delegate for heritage view
-extension GameplayViewController: HeritageViewDelegate {
-    func handleAllCardsRevealed() {
-        let postGameplayView = PostGameplayView(frame: CGRect(x: 0, y: headerLabel.frame.maxY, width: self.view.frame.width, height: self.view.frame.height - headerLabel.frame.height))
-        postGameplayView.alpha = 0
-        
-        self.postGameplayView = postGameplayView
-        
-        self.view.addSubview(self.postGameplayView)
-        
-        UIView.animate(withDuration: 2, animations: {
-            self.heritageView.alpha = 0
-            self.postGameplayView.alpha = 1
-        }, completion: { (_) in
-            self.heritageView.removeFromSuperview()
-        })
-    }
-}
+//extension GameplayViewController: HeritageViewDelegate {
+//    func handleAllCardsRevealed() {
+//        let postGameplayView = PostGameplayView(frame: CGRect(x: 0, y: headerLabel.frame.maxY, width: self.view.frame.width, height: self.view.frame.height - headerLabel.frame.height))
+//        postGameplayView.alpha = 0
+//
+//        self.postGameplayView = postGameplayView
+//
+//        self.view.addSubview(self.postGameplayView)
+//
+//        UIView.animate(withDuration: 2, animations: {
+//            self.heritageView.alpha = 0
+//            self.postGameplayView.alpha = 1
+//        }, completion: { (_) in
+//            self.heritageView.removeFromSuperview()
+//        })
+//    }
+//}

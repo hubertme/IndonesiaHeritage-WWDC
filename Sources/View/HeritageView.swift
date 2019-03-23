@@ -3,6 +3,7 @@ import UIKit
 
 protocol HeritageViewDelegate: class {
     func handleAllCardsRevealed()
+    func handleCardTap(on indexPath: IndexPath)
 }
 
 public class HeritageView: UIView {
@@ -17,6 +18,7 @@ public class HeritageView: UIView {
     var titleLabel: UILabel!
     var tempButton: UIButton!
     var postGameplayView: PostGameplayView!
+    var informationView: InformationView!
     
     // MARK: - Life cycle
     public override init(frame: CGRect) {
@@ -109,29 +111,33 @@ extension HeritageView: UICollectionViewDelegate, UICollectionViewDataSource {
     }
 }
 
-extension HeritageView: CardCellDelegate {
+extension HeritageView: CardCellDelegate, InformationViewDelegate {
     func cardCellTapped(at indexPath: IndexPath) {
         print("Tapped at indexpath item \(indexPath.item)")
         
-//        let currentCell = self.heritageCollectionView.cellForItem(at: indexPath) as! CardCell
-//
-//        let charLabel = UILabel(frame: currentCell.frame)
-//        charLabel.font = UIFont.systemFont(ofSize: 80, weight: .bold)
-//        charLabel.textAlignment = .center
-//        charLabel.numberOfLines = 1
-//        charLabel.text = self.characters[indexPath.item]
-//        charLabel.textColor = .black
-//        charLabel.sizeToFit()
-//
-//        currentCell.singleCardView.addSubview(charLabel)
-//
-//        UIView.transition(with: currentCell.singleCardView, duration: 0.5, options: .transitionFlipFromLeft, animations: {
-//            currentCell.singleCardView.backgroundColor = UIColor(patternImage: UIImage())
-//            print(charLabel.frame)
-//            currentCell.isUserInteractionEnabled = false
-//        }) { (_) in
-//            // Completion handler
-//        }
+//        self.delegate?.handleCardTap(on: indexPath)
+        
+        let informationViewImage = UIImage(named: "info-\((self.cardInformationSet[indexPath.item].title).lowercased()).jpg") ?? UIImage()
+        let currentCardInfo = self.cardInformationSet[indexPath.item]
+        let informationView = InformationView(frame: CGRect(x: 0, y: 0, width: 500, height: 700), title: currentCardInfo.title, information: currentCardInfo.description, image: informationViewImage, source: currentCardInfo.imageSource)
+        informationView.delegate = self
+        informationView.alpha = 0
+        
+        self.informationView = informationView
+        self.addSubview(self.informationView)
+        
+        UIView.animate(withDuration: 1) {
+            self.informationView.alpha = 1
+        }
+    }
+    
+    func handleCloseButtonTapped() {
+        print("close")
+        UIView.animate(withDuration: 1, animations: {
+            self.informationView.alpha = 0
+        }) { (_) in
+            self.informationView.removeFromSuperview()
+        }
     }
 }
 
