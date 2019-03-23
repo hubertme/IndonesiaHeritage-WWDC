@@ -42,7 +42,7 @@ public class HeritageView: UIView {
         self.titleLabel.font = UIFont.systemFont(ofSize: 30, weight: .semibold)
         self.titleLabel.textAlignment = .center
         self.titleLabel.numberOfLines = 1
-        self.titleLabel.text = "These are the cultures..."
+        self.titleLabel.text = "These are cultures in the card..."
         self.titleLabel.textColor = .darkGray
         self.titleLabel.sizeToFit()
         self.titleLabel.center = CGPoint(x: self.center.x, y: 100)
