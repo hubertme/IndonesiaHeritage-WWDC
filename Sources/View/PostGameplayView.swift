@@ -1,5 +1,6 @@
 import Foundation
 import UIKit
+import AVFoundation
 
 protocol PostGameplayViewDelegate: class {
     func setupWinningAnimation()
@@ -13,6 +14,7 @@ public class PostGameplayView: UIView {
     var thankYouIndonesianLabel: UILabel!
     var thankYouEnglishLabel: UILabel!
     weak var delegate: PostGameplayViewDelegate?
+    var audioPlayer: AVAudioPlayer?
     
     // MARK: - Lifecycle
     public override init(frame: CGRect) {
@@ -23,7 +25,8 @@ public class PostGameplayView: UIView {
         print(self.delegate)
         
         DispatchQueue.main.asyncAfter(deadline: .now()+0.5) {
-            self.delegate?.setupWinningAnimation()
+            self.playClapSound(volume: 90)
+            
             UIView.animate(withDuration: 1.5, animations: {
                 self.headerLabel.alpha = 1
                 self.subheaderLabel.alpha = 1
@@ -94,5 +97,18 @@ public class PostGameplayView: UIView {
         self.addSubview(self.thankYouEnglishLabel)
         
         print(self.headerLabel.frame)
+    }
+    
+    private func playClapSound(volume: Float) {
+        let musicUrl = URL(fileURLWithPath: Bundle.main.path(forResource: "clap.wav", ofType: nil)!)
+        
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: musicUrl)
+            audioPlayer?.numberOfLoops = 1
+            audioPlayer?.volume = volume
+            audioPlayer?.play()
+        } catch {
+            print("Error in playing music \(error.localizedDescription)")
+        }
     }
 }

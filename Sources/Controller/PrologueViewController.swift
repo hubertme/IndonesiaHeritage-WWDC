@@ -9,7 +9,6 @@ public class PrologueViewController: UIViewController {
     let backgroundColor: UIColor = UIColor.white
     
     // MARK: - Outlets
-    var navigateButton: UIButton!
     var merdekaLabel: UILabel!
     var merdekaProgressView: UIView!
     var welcomeIndonesianLabel: UILabel!

@@ -1,6 +1,5 @@
 import Foundation
 import UIKit
-import AVFoundation
 
 public class GameplayViewController : UIViewController, CardCellDelegate {
     
@@ -8,13 +7,12 @@ public class GameplayViewController : UIViewController, CardCellDelegate {
     var cardInformationSet = [CardInformation]()
     var cardsFinished: CGFloat = 0
     var previousCardInfo: (CardInformation, IndexPath)?
-    var audioPlayer: AVAudioPlayer?
     
     // MARK: - View properties
     var cardCollectionView: UICollectionView!
     var informationView: InformationView!
     var headerLabel: UILabel!
-    var postGameplayView: PostGameplayView!
+    var postGameplayView: HeritageView!
     
     // MARK: - Life cycle
     override public func loadView() {
@@ -181,11 +179,11 @@ extension GameplayViewController: UICollectionViewDataSource {
     }
     
     private func setupPostGameplay() {
-        let postGameplayView = PostGameplayView(frame: self.cardCollectionView.frame)
-        postGameplayView.alpha = 0
-        postGameplayView.delegate = self
+        let heritageView = HeritageView(frame: self.cardCollectionView.frame)
         
-        self.postGameplayView = postGameplayView
+        self.postGameplayView = heritageView
+        self.postGameplayView.alpha = 0
+        print(self.postGameplayView)
         self.cardCollectionView.removeFromSuperview()
         
         self.view.addSubview(self.postGameplayView)
@@ -210,28 +208,6 @@ extension GameplayViewController: InformationViewDelegate {
         
         if Int(exactly: self.cardsFinished) == self.cardInformationSet.count/2 {
             self.setupPostGameplay()
-        }
-    }
-}
-
-// Delegate for post gameplay
-extension GameplayViewController: PostGameplayViewDelegate {
-    func setupWinningAnimation() {
-        print("Winning animation")
-        
-        self.playClapSound(volume: 90)
-    }
-    
-    private func playClapSound(volume: Float) {
-        let musicUrl = URL(fileURLWithPath: Bundle.main.path(forResource: "clap.wav", ofType: nil)!)
-        
-        do {
-            audioPlayer = try AVAudioPlayer(contentsOf: musicUrl)
-            audioPlayer?.numberOfLoops = 1
-            audioPlayer?.volume = volume
-            audioPlayer?.play()
-        } catch {
-            print("Error in playing music \(error.localizedDescription)")
         }
     }
 }
