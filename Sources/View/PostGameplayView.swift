@@ -64,7 +64,7 @@ public class PostGameplayView: UIView {
         self.subheaderLabel.textColor = .darkGray
         self.subheaderLabel.numberOfLines = 0
         self.subheaderLabel.textAlignment = .center
-        self.subheaderLabel.text = "Spreaded across Indonesia,\nyet connected and remembered always.\nJust like the cards.\n\nThis is the spirit of Indonesia that\nThe World acknowledge..."
+        self.subheaderLabel.text = "Spreaded across Indonesia,\nyet connected and remembered always.\nJust like the cards.\n\nThis is the spirit of Indonesia that\nThe World acknowledged..."
         self.subheaderLabel.sizeToFit()
         self.subheaderLabel.frame = CGRect(x: self.center.x - self.subheaderLabel.frame.width/2, y: self.headerLabel.frame.maxY + 32, width: self.subheaderLabel.frame.width, height: self.subheaderLabel.frame.height)
         self.subheaderLabel.alpha = 0

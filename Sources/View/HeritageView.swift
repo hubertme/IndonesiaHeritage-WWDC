@@ -2,7 +2,7 @@ import Foundation
 import UIKit
 
 protocol HeritageViewDelegate: class {
-    func handleAllCardsRevealed()
+    func revealPostGameplay()
     func handleCardTap(on indexPath: IndexPath)
 }
 
@@ -45,7 +45,7 @@ public class HeritageView: UIView {
         self.titleLabel.text = "These are the cultures..."
         self.titleLabel.textColor = .darkGray
         self.titleLabel.sizeToFit()
-        self.titleLabel.center = CGPoint(x: self.center.x, y: 70)
+        self.titleLabel.center = CGPoint(x: self.center.x, y: 100)
         
         print("Title label: \(self.titleLabel.frame) with alpha: \(self.titleLabel.alpha)")
         self.addSubview(self.titleLabel)
@@ -82,7 +82,7 @@ public class HeritageView: UIView {
     }
     
     @objc private func navigateToPostGameplay() {
-        delegate?.handleAllCardsRevealed()
+        delegate?.revealPostGameplay()
     }
 }
 

@@ -196,38 +196,45 @@ extension GameplayViewController: InformationViewDelegate {
     }
     
     private func setupPostGameplay() {
-        let heritageView = HeritageView(frame: self.cardCollectionView.frame)
+        let heritageView = HeritageView(frame: self.view.frame)
+        heritageView.delegate = self
         
         self.heritageView = heritageView
         self.heritageView.alpha = 0
         print(self.heritageView)
-        self.cardCollectionView.removeFromSuperview()
         
         self.view.addSubview(self.heritageView)
         
         UIView.animate(withDuration: 2, animations: {
             self.heritageView.alpha = 1
+            self.headerLabel.alpha = 0
         }, completion: { (_) in
-            // Completion handler
+            self.cardCollectionView.removeFromSuperview()
+//            self.headerLabel.removeFromSuperview()
         })
     }
 }
 
 // Delegate for heritage view
-//extension GameplayViewController: HeritageViewDelegate {
-//    func handleAllCardsRevealed() {
-//        let postGameplayView = PostGameplayView(frame: CGRect(x: 0, y: headerLabel.frame.maxY, width: self.view.frame.width, height: self.view.frame.height - headerLabel.frame.height))
-//        postGameplayView.alpha = 0
-//
-//        self.postGameplayView = postGameplayView
-//
-//        self.view.addSubview(self.postGameplayView)
-//
-//        UIView.animate(withDuration: 2, animations: {
-//            self.heritageView.alpha = 0
-//            self.postGameplayView.alpha = 1
-//        }, completion: { (_) in
-//            self.heritageView.removeFromSuperview()
-//        })
-//    }
-//}
+extension GameplayViewController: HeritageViewDelegate {
+    func revealPostGameplay() {
+        let postGameplayView = PostGameplayView(frame: CGRect(x: 0, y: headerLabel.frame.maxY, width: self.view.frame.width, height: self.view.frame.height - headerLabel.frame.height))
+        postGameplayView.alpha = 0
+
+        self.postGameplayView = postGameplayView
+
+        self.view.addSubview(self.postGameplayView)
+
+        UIView.animate(withDuration: 2, animations: {
+            self.heritageView.alpha = 0
+            self.postGameplayView.alpha = 1
+            self.headerLabel.alpha = 1
+        }, completion: { (_) in
+            self.heritageView.removeFromSuperview()
+        })
+    }
+    
+    func handleCardTap(on indexPath: IndexPath) {
+        print("Tapped on something")
+    }
+}
