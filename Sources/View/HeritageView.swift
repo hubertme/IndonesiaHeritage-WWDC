@@ -16,6 +16,7 @@ public class HeritageView: UIView {
     // MARK: - Outlets
     var heritageCollectionView: UICollectionView!
     var titleLabel: UILabel!
+    var detailLabel: UILabel!
     var tempButton: UIButton!
     var postGameplayView: PostGameplayView!
     var informationView: InformationView!
@@ -45,10 +46,21 @@ public class HeritageView: UIView {
         self.titleLabel.text = "These are cultures in the card..."
         self.titleLabel.textColor = .darkGray
         self.titleLabel.sizeToFit()
-        self.titleLabel.center = CGPoint(x: self.center.x, y: 100)
+        self.titleLabel.center = CGPoint(x: self.center.x, y: 110)
         
-        print("Title label: \(self.titleLabel.frame) with alpha: \(self.titleLabel.alpha)")
         self.addSubview(self.titleLabel)
+        
+        // Detail label
+        self.detailLabel = UILabel()
+        self.detailLabel.font = UIFont.systemFont(ofSize: 18, weight: .light)
+        self.detailLabel.textAlignment = .center
+        self.detailLabel.numberOfLines = 1
+        self.detailLabel.text = "Click every card for more information!"
+        self.detailLabel.textColor = .gray
+        self.detailLabel.sizeToFit()
+        self.detailLabel.center = CGPoint(x: self.center.x, y: self.titleLabel.frame.maxY + self.detailLabel.frame.height/2 + 8)
+        
+        self.addSubview(self.detailLabel)
         
         // Collection view
         let cardHeight: CGFloat = 160
@@ -57,7 +69,7 @@ public class HeritageView: UIView {
         flowLayout.itemSize = CGSize(width: 100, height: cardHeight)
         flowLayout.scrollDirection = .vertical
         
-        self.heritageCollectionView = UICollectionView(frame: CGRect(x: 0, y: self.titleLabel.frame.maxY + 24, width: self.frame.width, height: 2*cardHeight + 40), collectionViewLayout: flowLayout)
+        self.heritageCollectionView = UICollectionView(frame: CGRect(x: 0, y: self.detailLabel.frame.maxY + 24, width: self.frame.width, height: 2*cardHeight + 40), collectionViewLayout: flowLayout)
         self.heritageCollectionView.backgroundColor = .white
         self.heritageCollectionView.delegate = self
         self.heritageCollectionView.dataSource = self
