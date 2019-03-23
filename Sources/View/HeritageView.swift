@@ -13,22 +13,7 @@ public class HeritageView: UIView {
     weak var delegate: HeritageViewDelegate?
     
     // MARK: - Outlets
-    var heritageCollectionView: UICollectionView! {
-        didSet {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                UIView.animateKeyframes(withDuration: 2, delay: 0, options: .calculationModeLinear, animations: {
-                    for idx in 0..<self.cardInformationSet.count {
-                        print("animate!")
-                        UIView.addKeyframe(withRelativeStartTime: Double(idx/self.cardInformationSet.count), relativeDuration: Double(1/self.cardInformationSet.count), animations: {
-                            self.heritageCollectionView.cellForItem(at: IndexPath(row: idx, section: 0))?.alpha = 1
-                        })
-                    }
-                }) { (_) in
-                    // Completion handler
-                }
-            }
-        }
-    }
+    var heritageCollectionView: UICollectionView!
     var titleLabel: UILabel!
     var tempButton: UIButton!
     var postGameplayView: PostGameplayView!
@@ -109,8 +94,27 @@ extension HeritageView: UICollectionViewDelegate, UICollectionViewDataSource {
         cardCell.indexPath = indexPath
         cardCell.singleCardView.backgroundColor = UIColor(patternImage: UIImage(named: "card-\((self.cardInformationSet[indexPath.item].title).lowercased()).jpg") ?? UIImage())
         cardCell.delegate = self
-        cardCell.alpha = 0
+//        cardCell.alpha = indexPath.item == 7 ? 1 : 0
+        
+//        if self.heritageCollectionView.indexPathsForVisibleItems.count == 7 {
+//            self.handleAllCellsAppeared()
+//        }
+        
         return cardCell
+    }
+    
+    private func handleAllCellsAppeared() {
+        print("All cells appeared!")
+        UIView.animateKeyframes(withDuration: 2, delay: 0, options: .calculationModeLinear, animations: {
+            for idx in 0..<self.cardInformationSet.count {
+                print("animate!")
+                UIView.addKeyframe(withRelativeStartTime: Double(idx/self.cardInformationSet.count), relativeDuration: Double(1/self.cardInformationSet.count), animations: {
+                    self.heritageCollectionView.cellForItem(at: IndexPath(row: idx, section: 0))?.alpha = 1
+                })
+            }
+        }) { (_) in
+            // Completion handler
+        }
     }
 }
 
