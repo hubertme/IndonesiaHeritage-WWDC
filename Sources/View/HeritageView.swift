@@ -40,10 +40,10 @@ public class HeritageView: UIView {
         self.titleLabel.font = UIFont.systemFont(ofSize: 30, weight: .semibold)
         self.titleLabel.textAlignment = .center
         self.titleLabel.numberOfLines = 1
-        self.titleLabel.text = "Indonesia's"
+        self.titleLabel.text = "These are the cultures..."
         self.titleLabel.textColor = .darkGray
         self.titleLabel.sizeToFit()
-        self.titleLabel.center = CGPoint(x: self.center.x, y: 50)
+        self.titleLabel.center = CGPoint(x: self.center.x, y: 70)
         
         print("Title label: \(self.titleLabel.frame) with alpha: \(self.titleLabel.alpha)")
         self.addSubview(self.titleLabel)
@@ -55,7 +55,7 @@ public class HeritageView: UIView {
         flowLayout.itemSize = CGSize(width: 100, height: cardHeight)
         flowLayout.scrollDirection = .vertical
         
-        self.heritageCollectionView = UICollectionView(frame: CGRect(x: 0, y: self.titleLabel.frame.maxY, width: self.frame.width, height: 2*cardHeight + 40), collectionViewLayout: flowLayout)
+        self.heritageCollectionView = UICollectionView(frame: CGRect(x: 0, y: self.titleLabel.frame.maxY + 24, width: self.frame.width, height: 2*cardHeight + 40), collectionViewLayout: flowLayout)
         self.heritageCollectionView.backgroundColor = .white
         self.heritageCollectionView.delegate = self
         self.heritageCollectionView.dataSource = self
@@ -65,9 +65,14 @@ public class HeritageView: UIView {
         
         // Temp button
         self.tempButton = UIButton(type: .system)
-        self.tempButton.frame.size = CGSize(width: 50, height: 30)
-        self.tempButton.setTitle("Next", for: .normal)
-        self.tempButton.center = CGPoint(x: self.center.x, y: self.heritageCollectionView.frame.maxY + self.tempButton.frame.height/2 + 64)
+        self.tempButton.frame.size = CGSize(width: 250, height: 60)
+        self.tempButton.setTitle("Got it 😄", for: .normal)
+        self.tempButton.titleLabel?.font = UIFont.systemFont(ofSize: 24, weight: .semibold)
+        self.tempButton.setTitleColor(.white, for: .normal)
+        self.tempButton.backgroundColor = .darkGray
+        self.tempButton.center = CGPoint(x: self.center.x, y: self.heritageCollectionView.frame.maxY + self.tempButton.frame.height/2 + 16)
+        self.tempButton.clipsToBounds = true
+        self.tempButton.layer.cornerRadius = 8
         self.tempButton.addTarget(self, action: #selector(navigateToPostGameplay), for: .touchUpInside)
         
         print("Temp button frame: \(self.tempButton.frame)")
@@ -102,25 +107,31 @@ extension HeritageView: UICollectionViewDelegate, UICollectionViewDataSource {
         
         return cardCell
     }
-    
-    private func handleAllCellsAppeared() {
-        print("All cells appeared!")
-        UIView.animateKeyframes(withDuration: 2, delay: 0, options: .calculationModeLinear, animations: {
-            for idx in 0..<self.cardInformationSet.count {
-                print("animate!")
-                UIView.addKeyframe(withRelativeStartTime: Double(idx/self.cardInformationSet.count), relativeDuration: Double(1/self.cardInformationSet.count), animations: {
-                    self.heritageCollectionView.cellForItem(at: IndexPath(row: idx, section: 0))?.alpha = 1
-                })
-            }
-        }) { (_) in
-            // Completion handler
-        }
-    }
 }
 
 extension HeritageView: CardCellDelegate {
     func cardCellTapped(at indexPath: IndexPath) {
         print("Tapped at indexpath item \(indexPath.item)")
+        
+//        let currentCell = self.heritageCollectionView.cellForItem(at: indexPath) as! CardCell
+//
+//        let charLabel = UILabel(frame: currentCell.frame)
+//        charLabel.font = UIFont.systemFont(ofSize: 80, weight: .bold)
+//        charLabel.textAlignment = .center
+//        charLabel.numberOfLines = 1
+//        charLabel.text = self.characters[indexPath.item]
+//        charLabel.textColor = .black
+//        charLabel.sizeToFit()
+//
+//        currentCell.singleCardView.addSubview(charLabel)
+//
+//        UIView.transition(with: currentCell.singleCardView, duration: 0.5, options: .transitionFlipFromLeft, animations: {
+//            currentCell.singleCardView.backgroundColor = UIColor(patternImage: UIImage())
+//            print(charLabel.frame)
+//            currentCell.isUserInteractionEnabled = false
+//        }) { (_) in
+//            // Completion handler
+//        }
     }
 }
 
