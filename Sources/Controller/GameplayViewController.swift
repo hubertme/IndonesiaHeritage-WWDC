@@ -1,5 +1,6 @@
 import Foundation
 import UIKit
+import AVFoundation
 
 public class GameplayViewController : UIViewController, CardCellDelegate {
     
@@ -7,6 +8,7 @@ public class GameplayViewController : UIViewController, CardCellDelegate {
     var cardInformationSet = [CardInformation]()
     var cardsFinished: CGFloat = 0
     var previousCardInfo: (CardInformation, IndexPath)?
+    var audioPlayer: AVAudioPlayer?
     
     // MARK: - View properties
     var cardCollectionView: UICollectionView!
@@ -217,5 +219,19 @@ extension GameplayViewController: PostGameplayViewDelegate {
     func setupWinningAnimation() {
         print("Winning animation")
         
+        self.playClapSound(volume: 90)
+    }
+    
+    private func playClapSound(volume: Float) {
+        let musicUrl = URL(fileURLWithPath: Bundle.main.path(forResource: "clap.wav", ofType: nil)!)
+        
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: musicUrl)
+            audioPlayer?.numberOfLoops = 1
+            audioPlayer?.volume = volume
+            audioPlayer?.play()
+        } catch {
+            print("Error in playing music \(error.localizedDescription)")
+        }
     }
 }
