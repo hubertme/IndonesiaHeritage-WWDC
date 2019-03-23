@@ -1,11 +1,16 @@
 import Foundation
 import UIKit
 
+protocol HeritageViewDelegate: class {
+    func handleAllCardsRevealed()
+}
+
 public class HeritageView: UIView {
     
     // MARK: - Attributes
     var cardInformationSet = [CardInformation]()
     let characters = ["H", "E", "R", "I", "T", "A", "G", "E"]
+    weak var delegate: HeritageViewDelegate?
     
     // MARK: - Outlets
     var heritageCollectionView: UICollectionView!
@@ -57,19 +62,7 @@ public class HeritageView: UIView {
     }
     
     @objc private func navigateToPostGameplay() {
-        let postGameplayView = PostGameplayView(frame: self.frame)
-        postGameplayView.alpha = 0
-        
-        self.postGameplayView = postGameplayView
-//        self.cardCollectionView.removeFromSuperview()
-        
-        self.addSubview(self.postGameplayView)
-        
-        UIView.animate(withDuration: 2, animations: {
-            self.postGameplayView.alpha = 1
-        }, completion: { (_) in
-            // Completion handler
-        })
+        delegate?.handleAllCardsRevealed()
     }
 }
 
